@@ -8,23 +8,23 @@
 ## The teacher: Morgan Giraud
 ![Morgan Giraud](https://en.gravatar.com/userimage/27393472/35e00906a5a12cd6a66616944e8d5edf.png?size=200)
 
-[Linkedin](https://fr.linkedin.com/in/morgangiraud)
-[Github](https://github.com/morgangiraud)
+[Linkedin](https://fr.linkedin.com/in/morgangiraud) <!-- .element: target="_blank" -->
+[Github](https://github.com/morgangiraud) <!-- .element: target="_blank" -->
 
 ---
 # Javascript
 - Scripting language
 - Async et callback !
-- Let's have a look at the [standard](https://fr.wikipedia.org/wiki/ECMAScript)
+- Let's have a look at the [standard](https://fr.wikipedia.org/wiki/ECMAScript) <!-- .element: target="_blank" -->
 
 --
 # Browsers and javascript
-See [how does that work](https://www.youtube.com/watch?v=ioXBf3FAJt8)
+See [how does that work](https://www.youtube.com/watch?v=ioXBf3FAJt8) <!-- .element: target="_blank" -->
 
 ---
 
 # Async Behaviors
-Example: What is the output of this code ?
+Example: What is the output of this code?
 ```javascript
 // Example 1
 setTimeout(function(){ // setTimeout is an async function
@@ -41,7 +41,7 @@ Output:
 
 --
 ## Async Behaviors - next
-Example: What is the output of this code ?
+Example: What is the output of this code?
 ```javascript
 setTimeout(function(){
     console.log(1);    
@@ -58,7 +58,7 @@ Output:
 ...
 ```
 <!-- .element: class="fragment" -->
-You will never see the "1", Why ? <!-- .element: class="fragment" -->
+You will never see the "1", Why? <!-- .element: class="fragment" -->
 
 The callback call has been added to the queue but the event loop doesn't have any "time" to check the queue<!-- .element: class="fragment" -->
 
@@ -78,8 +78,8 @@ From the JavasScript process viewpoint, every I/O is asynchronized
 # NodeJS
 - NodeJS Installation : `brew install nodejs`
 - What is NodeJS
-  - Let's look at the deps folder: https://github.com/nodejs/node/tree/master/deps
-- Here is the doc: [Reference](https://nodejs.org/api/)
+  - Let's look at the deps folder: https://github.com/nodejs/node/tree/master/deps <!-- .element: target="_blank" -->
+- Here is the doc: [Reference](https://nodejs.org/api/) <!-- .element: target="_blank" -->
 
 --
 # Exercice
@@ -115,7 +115,7 @@ existingScriptTag.parent.appendChild(s);
 ---
 
 # Algorithmy
-What is an [algorithm](https://fr.wikipedia.org/wiki/Algorithme) ?
+What is an [algorithm](https://fr.wikipedia.org/wiki/Algorithme)? <!-- .element: target="_blank" -->
 
 First: Basic mathematic concept checkup
   - A sum: $\sum_{i=0}^n i = \frac{n(n+1)}{2}$
@@ -136,9 +136,9 @@ Note:
 
 ---
 # Complexity
-What is a [complexity "theta of n": $\Theta(n)$](https://en.wikipedia.org/wiki/Analysis_of_algorithms#Evaluating_run-time_complexity) ?
+What is a [complexity "theta of n": $\Theta(n)$](https://en.wikipedia.org/wiki/Analysis_of_algorithms#Evaluating_run-time_complexity)? <!-- .element: target="_blank" -->
 
-A good [ressource](http://discrete.gr/complexity) to start !
+A good [ressource](http://discrete.gr/complexity) to start ! <!-- .element: target="_blank" -->
 
 --
 ## Fundamental instructions
@@ -195,14 +195,14 @@ We read it"Big O of n":
 var b = [];
 for(var i = 0;i < n;i++){
   var m = a[0];
-  var mi = 0;
-  a.forEach(function(element, i){
+  var mj = 0;
+  a.forEach(function(element, j){
     if(element < m){
       m = element;
-      mi = i;
+      mj = j;
     }
   });
-  array.splice(mi, 1);
+  a.splice(mj, 1);
   b.push(m); 
 }
 ```
@@ -210,7 +210,7 @@ for(var i = 0;i < n;i++){
 --
 You can say that: $\Theta(n) = \sum_{i=0}^n i$ but if you don't know how to calculate this formula it's clearly of no use
 
-What can we do ?
+What can we do?
 
 ----
 We know that $ \Theta(n) = \sum_{i=0}^n i $ and $\forall i: i < n$ <!-- .element: class="fragment" -->
