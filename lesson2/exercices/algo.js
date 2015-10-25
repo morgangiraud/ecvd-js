@@ -32,15 +32,40 @@ Answer:
 
 // Ex 2
 for(var i = 1; i < n; i *= 2 ) {
-  for(var j = n; j > 0; j /= 2 ) { 
+  for(var j = n; j > 0; j = Math.floor(j/2) { 
     for(var k = j; k < n; k += 2 ) {
       sum += (i + j * k );
     }
   }
 }
 /*
-Answer: 
-Same as first one: n * (log(n))^2
+Answer:
+1.  we can see that the first loop is independent from the two other
+
+2. Loop analysis
+- The first loop: complexity of n
+
+- The second and third loop are dependent, let's first find a majoration
+  - Majoration:
+    - On the third loop we have k > j or j > 0 so k > 0
+    - If we replace k = j by k = 0 all the loop become again independent
+    - The second loop is of complexity log(n)
+    - The third loop os of complexity n
+    - We have a majoration O(n^2 * log(n))
+  - complexity
+    - We know that second loop goes round m = log_2(n) times (n = 2^m)
+    - for each j  the third loop goes round (n-j)/2 times
+    - Globally those two goes round 1 + (n - n/2)/2 + (n - n/4)/2 + (n - n/8)/2 ...
+    - 1 + [(n - n/2) + (n - n/4) + ...] / 2
+    - 1 + m * n / 2 - (n/2 + n/4 + n/8 + ...) / 2
+    - 1 + m * 2^(m-1) - (2^(m-1) + 2^(m-2) + 2^(m-3)) / 2
+    - 1 + m * 2^(m-1) − (1 + 2 + ... +2^(m−1)) / 2
+    - 1 + m * 2^(m-1) − (2^m - 1) / 2
+    - 1.5 + (m - 1) * 2^(m-1)
+    - 1.5 + (log(n) - 1) * n / 2
+    - Finally the complexity of the two loops is O(n * log(n))
+
+3. Total complexity: n * (log(n))^2
 */
 
 
