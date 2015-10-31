@@ -1,7 +1,10 @@
-# JS - Node / Algo
-*ECV Digital - 22/10/2015*
+# JS / Algo
 
-**Pre-requisites: lesson 1**
+## Algorithmy: advanced complexity calculus
+
+*Pre-requisites: lesson 1*
+
+*ECV Digital - 22/10/2015*
 
 ---
 # Majoration: $O(n)$
@@ -101,7 +104,7 @@ Note: log_2(2) = 1;
 ---
 
 # Exercices
-> For a detailed solution see the [algo.js](https://github.com/morgangiraud/ecvd-js/blob/master/lesson2/exercices/algo.js) exercice file
+> For a detailed solution see the [algo.js](https://github.com/morgangiraud/ecvd-js/blob/master/lesson2/exercices/algo.js) exercice file <!-- .element: target="_blank" -->
 
 Calcul the complexity of this code
 ```javascript
@@ -172,7 +175,7 @@ In the following picture the tail's size is 3 and the loop size is 11.
 - Run the tests using `node my-folder/chain.js`
 - When you succeed, commit your work and create a pull request.
 
-> Credit to [Codewar](http://www.codewars.com/)
+> Credit to [Codewar](http://www.codewars.com/) <!-- .element: target="_blank" -->
 
 
 

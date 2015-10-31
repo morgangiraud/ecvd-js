@@ -1,8 +1,10 @@
-# JS - Node / Algo
+# JS / Algo
+
+### Introduction to JavaScript and algorithmy
+
+*Pre-requisites: you must read the Readme placed at the root folder to setup your computer*
+
 *ECV Digital - 15/10/2015*
-
-**Pre-requisites: you must read the Readme placed at the root folder to setup your computer**
-
 ---
 # Welcome 
 ## The teacher: Morgan Giraud
