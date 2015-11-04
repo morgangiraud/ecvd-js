@@ -1,22 +1,24 @@
 function loopSize(node){
-  // Put your code here
-var tab = [];
-var j=0;
 
-for (j=0;; node=node.next){
+  var the_node = node,
+    i = 0,
+    tab = [];
+  
+  // On boucle en vérifiant si le tableau ne contient pas le noeud
+  while(tab.indexOf(the_node) == -1) {
+    // Si non, on ajoute le noeud au tableau
+    tab[i] = the_node;
 
-  if (tab.indexOf(node) === -1) {
-    tab.push(node);
-    j++;
+    // On passe au noeud suivant
+    the_node = the_node.next;
+    i = i + 1;
   }
-  else {
-    console.log(tab.indexOf(node));
-    return j- tab.indexOf(node);;
-  }
+
+  // On retourne le nombre de fois où on a bouclé moins l'offset du noeud retrouvé pour renvoyer la taille de la loop
+  return i - tab.indexOf(the_node);
 }
 
-}
-// Teseting environment
+// Testing environment
 function createChain(tailLength, loopLength){
   list = [];
   for(i=0; i < tailLength + loopLength; i++){
@@ -39,7 +41,7 @@ if(result != 1){
   console.log("Test 1: success");
 }
 
-// Test 2
+//Test 2
 list = createChain(8778, 23);
 result = loopSize(list)
 if(result != 23){

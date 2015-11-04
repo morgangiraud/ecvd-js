@@ -62,7 +62,7 @@ A wonderfull history article about modules:
 
 Hint:
 Introducing the holy grail of the js developper command lines: 
-```
+```bash
 webpack-dev-server --hot --inline
 ```
 

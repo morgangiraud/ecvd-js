@@ -1,0 +1,22 @@
+{
+  "name": "guillaume",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "dependencies": {
+    "css-loader": "^0.21.0",
+    "es6-promise": "^3.0.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2"
+  },
+  "devDependencies": {
+    "css-loader": "^0.21.0",
+    "style-loader": "^0.13.0",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
