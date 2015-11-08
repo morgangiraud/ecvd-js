@@ -1,5 +1,5 @@
 # JS / Algo
-## Understanding functions
+## Understanding functions and scope
 
 *Pre-requisites: lesson 3*
 
@@ -159,6 +159,9 @@ logMyName();
 
 <!-- .element: class="fragment" -->
 
+
+[NFE Demystified](http://kangax.github.io/nfe/) <!-- .element: target="_blank" -->
+
 --
 ## Anonymous func.
 ```javascript
@@ -315,6 +318,165 @@ Closure and namespace are the only valuable use of anon. functions
 A good [article](https://remysharp.com/2015/10/14/the-art-of-debugging) <!-- .element: target="_blank" -->
 
 ---
+# Scope
+A scope is: **the part of the code where variables are visible and accessible**
+  - Scope are nested
+  - AS of ES5, javascript is function
+
+```javascript
+// We are in the global scope
+
+function init(){
+  //We are in the local init function scope
+  if(...){
+    // We still are in the local init function scope
+  }
+}
+// We are back in the global scope: 
+// when a function returns, its local scope is destroyed
+```
+
+--
+## Globally-scoped variable
+```javascript
+var a = 1; // global scope
+
+function one() {
+  console.log(a); // Display 1
+}
+console.log(a); // Display 1
+```
+
+--
+## Local scope
+```javascript
+var a = 1; // global scope
+
+function two(a) { // local scope
+  console.log(a); // Display the value of a at runtime
+}
+
+function three() {
+  var a = 3; // local scope again
+  console.log(a); // Display 3
+}
+console.log(a); // Display 1
+```
+
+--
+## Nested scope
+```javascript
+function primaryFunction(){
+  var a = 1; // local primaryFunction scope
+  function nestedFunction() {
+    var b = 2;
+    console.log(a); // Display 1
+  }
+  console.log(b); // Display undefined
+}
+```
+
+--
+## No block scope for `var`
+```javascript
+var a = 1; // Global scope
+
+function four() {
+  if (true) {
+    var a = 4; // Local function scope
+  }
+
+  console.log(a); // Display 4
+}
+```
+Remember hoisting:
+```javascript
+var a = 1; // Global scope
+
+function four() {
+  var a; // Variable declaration, local scope
+  if (true) {
+    a = 4; // Local function scope
+  }
+
+  console.log(a); // Display 4
+}
+```
+
+[source](http://stackoverflow.com/questions/500431/what-is-the-scope-of-variables-in-javascript) <!-- .element: target="_blank" -->
+--
+# Sneak peek into ES6
+#### let versus var and const variables
+- `var`: **function scope**, signal that it might be reassigned
+- `let`: **block scope**, signal that it might be reassigned
+  - Not hoisted
+  - Not properties on the global object
+- `const`: **block scope**, signal that it won’t be reassigned
+  - Same as let variables, but not reassignable
+
+
+--
+## Block scope 
+```javascript
+function four() {
+  // a is NOT defined here
+  if (true) {
+    // a is NOT defined here
+    let a = 4; 
+    // a is defined here
+  }
+  // a is NOT defined here
+
+  console.log(a); // Display undefined
+}
+```
+About const:
+```javascript
+const aConstVar = 'stuck';
+aConstVar = 5000; // SyntaxError
+```
+
+For an in depth explanation check [this article](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75) <!-- .element: target="_blank" -->
+
+---
+# Closure
+A Closure is a function returning an inner-function.
+```javascript
+function outerFunction(){ // <-- This is a closure
+  function innerFunction(){} // As a function defined inside an other function
+
+  return innerFunction;
+}
+
+```
+Some interesting thing happend when you do that:
+  - A closure scope is not destroyed when it returns
+  - The returned inner-function can still access the scope of the closure when it will be used
+
+--
+# Example
+```javascript
+function makeAdder(x) { 
+  // x is defined in the local scope of makeAdder
+  function addX(y){
+    // y is defined in the local scope of makeAdder
+    return x + y; // We can access the outer function scope
+  }
+  return addX; // We return the function which have a reference to a variable in the outer function scope
+};
+
+var add5 = makeAdder(5);
+console.log(add5(7)); // Display 12
+```
+We can use closure to *save the state* of our application at a given time for a given function.
+
+See the closure.js file in the exercices folder
+
+[Source](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) <!-- .element: target="_blank" -->
+
+[Diving deep into closures](http://www.jibbering.com/faq/notes/closures/) <!-- .element: target="_blank" -->
+
+---
 # Exercice
 Create a simple [proxy server](https://en.wikipedia.org/wiki/Proxy_server) using NodeJS:
 - Create a nodeJS server as seen in lesson1
@@ -374,12 +536,14 @@ var options = { host: 'google.com' };
 // Create the request
 var myReq = http.request(options, function(response){}); // Pass a callback to handle the response
 // myReq.write(postData); // You can write some post data if you make a POST request
-myReq.end(); // Send your request
+myReq.end(); // Send the request
 ```
 
-
 ```javascript
-response.writeHead(responseStatusCode, responseHeaders); //Write the response headers
+// Inside the callback
+
+//Write the response headers
+response.writeHead(responseStatusCode, responseHeaders); 
 response.write(data); // Write the response body
 response.end();  // Send your response
 ```
