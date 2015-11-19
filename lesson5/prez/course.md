@@ -160,6 +160,9 @@ function makeAdder(x) {
 };
 
 var add5 = makeAdder(5);
+var add8 = makeAdder(8);
+console.log(add5(7)); // → 12
+console.log(add8(7)); // → 15
 console.log(add5(7)); // → 12
 ```
 We can use closure to *save the state* of our application at a given time for a given function.
@@ -310,11 +313,12 @@ var list = {
 # Exercice 2
 - Write a function `arrayToList` that builds up a data structure like the previous one when given `[1, 2, 3]` as argument
 - write a `listToArray` function that produces an array from a list
-- Run the following program and check that it returns true.
+- Run the following program and check that it logs the same array.
 
 ```javascript
 var data = [2, "test", false, {"ref": 3}];
-console.log(data === arrayToList(listToArray(data)));
+console.log(data);
+console.log(listToArray(arrayToList(data)));
 ```
 
 ---
@@ -372,8 +376,22 @@ Using all we've seen, we'll build a simple todolist (trough next courses) with t
 - Create the **"add an item"** feature
 - Create the **"delete an item"** feature
 
+--
+# Project: A Todo list
 - Create a webpack environment
-- Create a first file called `app.js` with HOT reloading activated
-- Use multiple files
-- Use all you know about functions / scope / arrays / objects
-- use the template in the todoapp folder
+  - Create a webpack.config.js file
+  - Create an `entry.js` and `app.js` file
+  - require your `app.js` file from the `entry.js` one
+  - Be sure to load the css modules 
+```bash
+npm install css-loader style-loader
+```
+- Update the template to fit the webpack require
+- test it
+
+--
+# Project: A Todo list
+Start with the `add an item` feature
+- Create a closure which holds
+  - An array named todos
+  - a function which can add element to the array `todos` and return it
