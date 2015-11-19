@@ -10,16 +10,7 @@ function sum(array) {
 	return all;
 }
 
-//console.log(sum(range(0, 10)));
-
-
-
-
-
-
-
-
-
+console.log('result sum > range de 0 à 10', sum(range(0, 10)));
 
 
 
@@ -30,21 +21,12 @@ Object.size = function(obj) {
     return size;
 };
 
-
-
-
 function arrayToList(array) {
 	var myObject = {};
 
 	for (var i = 0; i < array.length; i++) {
-
 		myObject[i] = {};
-
-		if(typeof array[i] !== 'undefined') {
-			myObject[i].value = array[i];
-		} else {
-			myObject[i].value = array[i];
-		}
+		myObject[i].value = array[i];
 	}
 
 	return myObject;
@@ -57,9 +39,7 @@ function listToArray(list) {
 
 		if(typeof list[i].value === 'object') {
 
-			for(var key in list[i]) {
-				myArray[i] = list[i][key];
-			}
+			for(var key in list[i]) myArray[i] = list[i][key];
 
 		} else {
 			myArray[i] = list[i].value;
@@ -70,7 +50,4 @@ function listToArray(list) {
 
 var data = [2, "test", false, {"ref": 3}];
 console.log('firstList', data);
-console.log('result', listToArray(arrayToList(data)));
-
-// console.log(data === arrayToList(listToArray(data)));
-
+console.log('result   ', listToArray(arrayToList(data)));
