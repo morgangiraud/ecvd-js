@@ -1,5 +1,5 @@
 # JS / Algo
-## Understanding functions
+## Understanding functions and scope
 
 *Pre-requisites: lesson 3*
 
@@ -32,7 +32,7 @@ Different way to define them:
 function test(){}
 console.log(test());
 ```
-**Display `undefined`** 
+**→ `undefined`** 
 
 Be carefull this is not always the case:
 - PHP return `null`
@@ -53,7 +53,7 @@ function increment(a){
 a = increment(a); // JS stick here until the processing ends
 console.log(a);
 ```
-**Display `1`** <!-- .element: class="fragment" -->
+**→ `1`** <!-- .element: class="fragment" -->
 
 Sync. functions **block** the execution of the program while they process data. 
 
@@ -72,7 +72,7 @@ function asyncIncrement(a){
 a = asyncIncrement(a); // JS doesn't stick here until the processing ends
 console.log(a);
 ```
-**Display `0`** <!-- .element: class="fragment" -->
+**→ `0`** <!-- .element: class="fragment" -->
 
 Async. functions **don't block** the execution of the program while they process data
 
@@ -110,7 +110,7 @@ asyncIncrement(a, console.log);
 ```
 
 <!-- .element: class="fragment" -->
-**Display `1`** <!-- .element: class="fragment" -->
+**→ `1`** <!-- .element: class="fragment" -->
 
 --
 # Best practice
@@ -153,11 +153,14 @@ function logMyName(){
 }
 logMyName();
 ```
-**Display: `My name is logMyName`** <!-- .element: class="fragment" -->
+**→: `My name is logMyName`** <!-- .element: class="fragment" -->
 
 > This is a function declaration
 
 <!-- .element: class="fragment" -->
+
+
+[NFE Demystified](http://kangax.github.io/nfe/) <!-- .element: target="_blank" -->
 
 --
 ## Anonymous func.
@@ -170,13 +173,73 @@ var logMyName2 = function (){
 }
 logMyName2();
 ```
-**Display: `My name is `** <!-- .element: class="fragment" -->
+**→: `My name is `** <!-- .element: class="fragment" -->
 
 > This is a function expression
 
 <!-- .element: class="fragment" -->
 
+---
+# Full example! 
+#### Immediately-Invoked Function Expression (IIFE)
+```javascript
+var outsideName = (function (){
+  var name = arguments.callee.toString();
+  name = name.substr('function '.length);
+  name = name.substr(0, name.indexOf('('));
+  setTimeout(function(){
+    name = "fakeName";
+    console.log("My name is " + name);
+  }, 0);
+  return name;
+})()
+console.log("outsideName is " + outsideName);
+```
+
 --
+Remarks:
+- This is an anonymous function
+- This is a closure (See the scope section)
+- This function is async
+- We use `Immediately-Invoked Function Expression` (IIFE) to call it
+
+--
+# Debugging
+Anonymousing functions is a bad practice
+- Can't be traced proprely for debugging purpose
+  - Grouped together from a performance point of view
+- Less verbose code, might need more comments
+- Not reusable 
+
+Closure and namespace are the only valuable use of anon. functions
+
+> See some [Arguments for named functions](http://stackoverflow.com/questions/15336347/why-use-named-function-expressions) <!-- .element: target="_blank" -->
+
+A good [article](https://remysharp.com/2015/10/14/the-art-of-debugging) <!-- .element: target="_blank" -->
+
+---
+# Recursion
+A function can call itself, this is called recursion.
+
+```javascript
+function power(base, exponent) { 
+  if (exponent == 0){ return 1; }
+  return base * power(base, exponent - 1);
+}
+console.log(power(2,3)); // → 8
+```
+Look at the `recursion.js` for more example
+
+--
+# Recursion
+
+> Warning, calling a function is a lot more expensive than looping
+
+This is the dilemma of speed versus elegance, i would argue that:
+
+> Do not worry about efficiency until you know for sure that the program is too slow
+
+---
 # Hoisting!
 
 function declaration and function expression are not evaluated the same way by the compiler.
@@ -277,46 +340,73 @@ Source: http://stackoverflow.com/questions/7609276/javascript-function-order-why
 <!-- .element: class="fragment" -->
 
 ---
-# Full example! 
-#### Immediately-Invoked Function Expression (IIFE)
+# Exercice
+Create a simple [proxy server](https://en.wikipedia.org/wiki/Proxy_server) using NodeJS:
+- Create a nodeJS server as seen in lesson1
+- Use URLs like http://...?website=monip.org
+- Use `http` module to make a request from the NodeJS server
+- Return the fetched data into the response
+
+--
+# Help: Regex
+Regex are very usefull to check if a string conains an other one:
 ```javascript
-var outsideName = (function (){
-  var name = arguments.callee.toString();
-  name = name.substr('function '.length);
-  name = name.substr(0, name.indexOf('('));
-  setTimeout(function(){
-    name = "fakeName";
-    console.log("My name is " + name);
-  }, 0);
-  return name;
-})()
-console.log("outsideName is " + outsideName);
+//A regex definition:
+/favicon/
+
+// How to test a regex
+var str = "mon favicon"
+/favicon/.test(str); //return true
+/salut/.test(str); //return false
+```
+
+use it to check the url and remove useless calls!
+```javascript
+http.createServer(function (req, res) { // This callback is called every time a request come to the webserver
+  if(/favicon/i.test(req.url)){
+    res.writeHead(404);
+    res.end();  
+    return;
+  }
+```
+--
+#  Help: parsing
+There is a lot of usefull function to parse string
+
+Example: parsing simple urls
+```javascript
+// Url simple: http://mon.site.com/ma/route?arguments=value&arguments2=value2
+var arrayUrl = req.url.split("?");
+var agmtsString = arrayString[1]; // arguments=value&arguments2=value2
+var agmts = agmtsString.split("&");
+var paramObjet = {};
+for(var i = 0; i < agmts.length; i++){
+  var argument = agmts[i].split("=");
+  paramObjet[argument[0]] = argument[1];
+}
+console.log(paramObjet);
 ```
 
 --
-Remarks:
-- This is an anonymous function
-- This is a closure (See the scope section)
-- This function is async
-- We use `Immediately-Invoked Function Expression` (IIFE) to call it
+# Help: HTTP module
+The [`http` module](https://nodejs.org/api/http.html#http_http_request_options_callback) of NodeJS allows you to make http request easily <!-- .element: target="_blank" -->
 
---
-# Debugging
-Anonymousing functions is a bad practice
-- Can't be traced proprely for debugging purpose
-  - Grouped together from a performance point of view
-- Less verbose code, might need more comments
-- Not reusable 
+It allows you to make http response too!
+```javascript
+var http = require('http'); 
 
-Closure and namespace are the only valuable use of anon. functions
+var options = { host: 'google.com' };
+// Create the request
+var myReq = http.request(options, function(response){}); // Pass a callback to handle the response
+// myReq.write(postData); // You can write some post data if you make a POST request
+myReq.end(); // Send the request
+```
 
-> See some [Arguments for named functions](http://stackoverflow.com/questions/15336347/why-use-named-function-expressions)
+```javascript
+// Inside the callback
 
-A good [article](https://remysharp.com/2015/10/14/the-art-of-debugging)
-
----
-# Exercice
-Create a simple [proxy server](https://en.wikipedia.org/wiki/Proxy_server) using NodeJS:
-- Use URLs like http://...?website=monip.org
-- Use the Server package to make a GET call from the NodeJS server
-- Return the fetched data into the response
+//Write the response headers
+response.writeHead(responseStatusCode, responseHeaders); 
+response.write(data); // Write the response body
+response.end();  // Send your response
+```

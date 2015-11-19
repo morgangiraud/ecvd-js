@@ -39,6 +39,10 @@ What if you could update only some part of your application and keeping other pa
 > Webpack can do it, see next slide
 
 <!-- .element: class="fragment" -->
+--
+# A sneak peak into ES6
+
+[A good presentation](http://benjamn.github.io/empirenode-2015/#/) of the importe/export feature of ES6 <!-- .element: target="_blank" -->
 
 --
 # Hot reloading ([HMR](https://github.com/webpack/docs/wiki/hot-module-replacement-with-webpack)) <!-- .element: target="_blank" -->
