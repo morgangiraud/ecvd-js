@@ -1,8 +1,8 @@
-function closure(){ 
+function createClosure(){ 
   console.log("Creating a closure");
   var localState = 'pending';
 
-  function makeAction(actionName){
+  function closure(actionName){
     switch(actionName){
       case 'validate':
         localState = 'validated';
@@ -17,19 +17,19 @@ function closure(){
     }
   }
 
-  return makeAction;
+  return closure;
 }
-var makeAction = closure();
-makeAction();
-makeAction('validate');
-makeAction();
-makeAction('cancel');
-makeAction();
+var closure = createClosure();
+closure();
+closure('validate');
+closure();
+closure('cancel');
+closure();
 
-var makeAction2 = closure();
-makeAction2();
-makeAction2('cancel');
-makeAction2();
+var closure2 = createClosure();
+closure2();
+closure2('cancel');
+closure2();
 
 // We could rename all those elements to get:
 function createOrder(){ 

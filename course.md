@@ -85,10 +85,7 @@
 - Default actions **(l6)**
 - Key events **(l6)**
 - Mouse clicks **(l6)**
-- Focus events **(l6)**
 - Load event **(l6)**
-- Script execution timeline **(l6)**
-- Setting timers **(l6)**
 - Debouncing **(l6)**
 
 #### Node.js
