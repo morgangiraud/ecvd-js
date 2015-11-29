@@ -1,12 +1,16 @@
 # JS / Algo
-## The this keyword
+## More on data structure, streams and a look at the this keyword
 
 *Pre-requisites: lesson 6*
 
-*ECV Digital - 12/12/2015*
+*ECV Digital - 3/12/2015*
 
 ---
-Object
+Streams
+Mutability
+Usefull array methods
+Strings Object and their properties
+The Math object
 
 ---
 # This

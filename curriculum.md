@@ -1,118 +1,146 @@
-## JS - Course
+## JS / Algorithmy - Curriculum
+### Basic mathematic concept
+| Topic | Lesson |
+|---------|:--------:|
+| sum | **1** |
+| limit | **1** |
+| equivalence | **1** |
+| factorial | **1** |
+| logarithm | **1** |
 
-#### Values, Types, and Operators
-- Values **(l1)**
-- Numbers **(l1)**
-- Strings **(l1)**
-- Unary operators **(l1)**
-- Boolean values **(l1)**
-- Undefined values **(l1)**
-- Automatic type conversion **(l1)**
+### Complexity
+| Topic | Lesson |
+|---------|:--------:|
+| Fundamental instructions | **1** | 
+| Majoration | **2** | 
+| Recursive complexity | **2** | 
+| Logarithm complexity | **2** | 
 
-#### Functions
-- Defining a function **(l4)**
-- Parameters and scopes **(l5)**
-- Nested scope **(l4)**
-- Functions as values (Anon) **(l4)**
-- Declaration notation **(l4)**
-- Closure **(l5)**
-- Recursion **(l4)**
+### Values, Types, and Operators
+| Topic | Lesson |
+|---------|:--------:|
+| Values  | **1** |
+| Numbers | **1** |
+| Strings | **1** |
+| Unary operators | **1** |
+| Boolean values | **1** |
+| Undefined values | **1** |
+| Automatic type conversion | **1** |
 
-#### Data Structures: Objects and Arrays
-- Data sets **(l5)**
-- Properties **(l5)**
-- Methods 
-- Objects **(l5)**
-- Mutability 
-- Computing correlation 
-- Objects as maps 
-- The final analysis 
-- Further array-ology 
-- Strings and their properties 
-- The arguments object **(l4)**
-- The Math object 
-- The global object **(l5)**
+### Functions
+| Topic | Lesson |
+|---------|:--------:|
+| Defining a function | **4** |
+| Callback | **4** |
+| The arguments object | **4** | 
+| Named Function Expression (NFE) | **4** |
+| Anonynous functions | **4** |
+| IIFE | **4** |
+| Recursion | **4** |
+| Hoisting | **4** |
+| Parameters and scopes | **5** |
+| Nested scope | **5** |
+| Closure | **5** |
 
-#### Higher-Order Functions
-- Abstraction
-- Abstracting array traversal
-- Higher order functions
-- Passing along arguments
-- Filtering an array
-- Transforming with map
-- Summarizing with reduce
-- Composability
-- The cost
-- Binding
+### Data Structures: Objects and Arrays
+| Topic | Lesson |
+|---------|:--------:|
+| Data sets | **5** | 
+| Properties | **5** | 
+| Methods | **6** | 
+| Objects | **5** | 
+| Mutability | **7** | 
+| Objects as maps | **5** | 
+| Usefull array methods | **7** | 
+| Strings Object and their properties | **7** | 
+| The Math object  | **7** |
+| The global object | **5** |
+| A word on `this` | **7** |
 
-#### Bugs and Error Handling
-- Programmer mistakes
-- Strict mode
-- Testing
-- Debugging
-- Error propagation
-- Exceptions
-- Cleaning up after exceptions
-- Selective catching
-- Assertions
+### Functionnal programming
+| Topic | Lesson |
+|---------|:--------:|
+| Abstraction | **10** |
+| Abstracting array traversal | **10** |
+| Higher order functions | **10** |
+| Passing along arguments | **10** |
+| Filtering an array | **10** |
+| Transforming with map | **10** |
+| Summarizing with reduce | **10** |
+| Composability | **10** |
+| The cost | **10** |
+| Binding | **10** |
 
-#### Regular Expressions
-- Creating a regular expression
-- Testing for matches
-- Matching, Repeating, Grouping 
-- The date type
-- Word and string boundaries
-- The replace method
-- Dynamically creating RegExp objects
-- The search method
-- The lastIndex property
+### Bugs and Error Handling
+| Topic | Lesson |
+|---------|:--------:|
+| Programmer mistakes | **8** |
+| Strict mode | **8** |
+| Testing | **8** |
+| Debugging | **4** |
+| Error propagation | **8** |
+| Exceptions | **8** |
+| Cleaning up after exceptions | **8** |
+| Selective catching | **8** |
+| Assertions | **8** |
 
-#### Modules
-- Why modules help **(l3) **
-- Using functions as namespaces **(l5)**
-- Objects as interfaces **(l3)**
-- Detaching from the global scope **(l5)**
-- Evaluating data as code **(l3)**
-- Require **(l3)**
-- Slow loading modules **(l3)**
-- Interface design **(l3)**
+### Regular Expressions
+| Topic | Lesson |
+|---------|:--------:|
+| Creating a regular expression | **4** | 
+| Testing for matches | **4** | 
+| Matching, Repeating, Grouping  | **9** |
+| The date type | **9** |
+| Word and string boundaries | **9** |
+| The replace method | **9** |
+| Dynamically creating RegExp objects | **9** |
+| The search method | **9** |
+| The lastIndex property | **9** |
 
-#### Handling Events
-- Event handlers **(l5)**
-- Events and DOM nodes **(l5)**
-- Event objects **(l6)**
-- Propagation **(l6)**
-- Default actions **(l6)**
-- Key events **(l6)**
-- Mouse clicks **(l6)**
-- Load event **(l6)**
-- Debouncing **(l6)**
+### Modules
+| Topic | Lesson |
+|---------|:--------:|
+| Why modules help | **3** |
+| Using functions as namespaces | **5** |
+| Objects as interfaces | **3** |
+| Detaching from the global scope | **5** |
+| Evaluating data as code | **3** |
+| Require | **3** |
+| Slow loading modules | **3** |
+| Interface design | **3** |
 
-#### Node.js
-- Background **(l1)**
-- Asynchronicity **(l1)**
-- The node command **(l1)**
-- Modules **(l3)**
-- Installing with NPM **(l3)**
-- The file system module **(l1)**
-- The HTTP module **(l4)**
-- Streams
-- A simple file server **(l1)**
-- Error handling
+### Handling Events
+| Topic | Lesson |
+|---------|:--------:|
+| Event handlers | **5** |
+| Events and DOM nodes | **5** |
+| Event objects | **6** |
+| Propagation | **6** |
+| Default actions | **6** |
+| Key events | **6** |
+| Mouse clicks | **6** |
+| Load event | **6** |
 
-#### Browser
-- APIs
-- Storing data clientside
+### Node.js
+| Topic | Lesson |
+|---------|:--------:|
+| Background | **1** |
+| Asynchronicity | **1** |
+| The node command | **1** |
+| Modules | **3** |
+| Namespaces | **3** |
+| Installing with NPM | **3** |
+| The file system module | **1** |
+| The HTTP module | **4** |
+| Streams | **7** |
+| A simple file server | **1**, **3** | 
+| Error handling | **8**|
 
-## Algo - Course
-- Basic mathematic concept
-  - sum **(l1)**
-  - limit **(l1)**
-  - equivalence **(l1)**
-  - factorial **(l1)**
-  - logarithm **(l1)**
-- Complexity **(l1)**
-  - Fundamental instructions **(l1)**
-  - Majoration **(l2)**
-  - Recursive complexity **(l2)**
-  - Logarithm complexity **(l2)**
+### Browser
+| Topic | Lesson |
+|---------|:--------:|
+| Browser's module | **3** |
+| Webpack | **3** | 
+| Hot reloading | **3** | 
+| APIs | **3** |
+| Storing data clientside | **7** |
