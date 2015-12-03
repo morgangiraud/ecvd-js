@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Propagation</title>
+  <style type="text/css">
+    body  {
+      text-align: center;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <a class="default" href="event-propagation.html">a normal link</a>
+  </div>
+  <div>
+    <a class="prevent-default" href="event-propagation.html">a preventing default link</a>
+  </div>
+
+  <script>
+  var a = document.querySelector("a.default");
+  a.addEventListener("click", function(e) {
+    console.log("Let the default action!");
+  });
+
+  var preventDefaultA = document.querySelector("a.prevent-default");
+  preventDefaultA.addEventListener("click", function(e) {
+    console.log("Preventing default action!");
+    e.preventDefault(); // We prevent the default behavior to happen
+  });
+  </script>
+</body>
+</html>

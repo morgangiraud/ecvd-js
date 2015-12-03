@@ -1,0 +1,15 @@
+<button>Click me</button> 
+<script>
+var button = document.querySelector("button"); 
+var body = document.querySelector("body"); 
+
+body.addEventListener("keypress", function(event) {
+	console.log(event);
+  body.innerHTML += String.fromCharCode(event.charCode);
+});
+
+button.addEventListener("click", function(event) {
+	console.log("click");
+});
+
+</script>
