@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+      li{
+        padding: 10px;
+        cursor: pointer;
+      }
+      li:hover{
+        background-color: rgba(255,0,0,0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="todoapp">
+      <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?" autofocus>
+      </header>
+      <section class="main">
+        <ul class="todo-list"></ul>
+      </section>
+      <footer class="footer">
+        <span class="todo-count"></span>
+      </footer>
+    </section>
+    <footer class="info">
+    </footer>
+    <!--<script src="bundle.js"></script>-->
+    <script src="main.js"></script>
+  </body>
+</html>
