@@ -251,7 +251,7 @@ console.log(myObject.otherDatum); // → undefined
 ```
 
 --
-## Data structure: Objects
+## Data structure: accesing objects
 Due to the duality between Array and Object in javascript, property can accessed in two ways:
 ```javascript
 var myObject = {
@@ -266,7 +266,7 @@ console.log(myObject.datum, myObject["datum"]); // → false, false
 var myObject = {}; 
 var dynKey = "hop";
 myObject.dynKey = 1;
-myObject[dynKey] = 2;
+myObject[dynKey] = 2; // We treat an object as a map 
 console.log(myObject);
 ```
 > → `{ dynKey: 1, hop: 2 }`
@@ -391,7 +391,7 @@ Using all we've seen, we'll build a simple todolist (trough next courses) with t
   - require your `app.js` file from the `entry.js` one
   - Be sure to load the css modules 
 ```bash
-npm install css-loader style-loader
+npm install --save css-loader style-loader
 ```
 - Update the template to fit the webpack require
 - test it
