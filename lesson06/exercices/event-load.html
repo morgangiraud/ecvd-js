@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Propagation</title>
+  <style type="text/css">
+    body  {
+      text-align: center;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <script>
+  var firstAttempt = document.querySelector("#after-script");
+  addEventListener("load", function(e) { // equivalent to window.addEventListener
+    console.log("I've finished loading");
+    var secondAttempt = document.querySelector("#after-script");
+
+    console.log("My first attempt is null", firstAttempt);
+    console.log("My second attempt worked", secondAttempt);
+  });
+  </script>
+  <div id="after-script"></div>
+</body>
+</html>

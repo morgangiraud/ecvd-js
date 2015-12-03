@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Propagation</title>
+  <style type="text/css">
+    body  {
+      text-align: center;
+      margin: auto;
+    }
+    div {
+      width:240px;
+      margin: 10px auto;
+      border: 2px solid;
+    }
+    button {
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="propagate">
+    This button is my child node!
+    <button class="propagate">Propagate!</button>   
+  </div>
+  <div class="stop-propagation">
+    This button is my child node!
+    <button class="stop-propagation">Stop Propagation</button>   
+  </div>
+
+  <script>
+  var pDiv = document.querySelector("div.propagate");
+  var pButton = document.querySelector("button.propagate");
+  pButton.addEventListener("click", function(e) {
+    console.log("Let the event propagate !");
+  });
+  pDiv.addEventListener("click", function(e) {
+    console.log("You clicked!"); // Since the event propagates, every parents will "see" the event
+  });
+
+  var spDiv = document.querySelector("div.stop-propagation");
+  var spButton = document.querySelector("button.stop-propagation");
+  spButton.addEventListener("click", function(e) {
+    console.log("Stop the event propagation !");
+    e.stopPropagation(); // We stop the propagation of the event
+  });
+  spDiv.addEventListener("click", function(e) {
+    console.log("You clicked!");
+  });
+  </script>
+</body>
+</html>
