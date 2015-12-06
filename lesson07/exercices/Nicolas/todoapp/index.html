@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,12 +6,31 @@
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="index.css">
     <style>
-      li{
-        padding: 10px;
+      .todo-list li{
+        padding: 20px 60px 20px 20px;
+      }
+      .todo-list li:hover button{
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        z-index: 10;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
         cursor: pointer;
       }
-      li:hover{
-        background-color: rgba(255,0,0,0.5);
+      .todo-list li:hover button::after{
+        content: "x";
+        color: #cc9a9a;
+        transition: color 0.2s ease-out 0s;
+      }
+      .todo-list li:hover button:hover::after{
+        color: #af5b5e;
       }
     </style>
   </head>
