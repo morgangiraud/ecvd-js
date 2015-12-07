@@ -207,7 +207,6 @@ addEventListener("load", function(e) { // equivalent to window.addEventListener
 [Test it!](../exercices/event-load.html) <!-- .element: target="_blank" -->
 
 ---
-
 # Project: A Todo list
 > 
 - Create the **"add an item"** feature
@@ -216,9 +215,18 @@ addEventListener("load", function(e) { // equivalent to window.addEventListener
 --
 # Project: A Todo list
 Start with the `add an item` feature
-- Create a local context which holds
+- In a file called app.js, create a local scope which holds
   - An array named todos
   - A function which can add item to the array `todos`
-  - A function which can return the current state of the array `todos`
+  - A function which can return the current array `todos`
   - A function which can delete an item of the array `todos`
-- Link those closure to to event listeners
+- Require this file in your entry.js file
+
+--
+# Project: A Todo list
+Use two event listeners to link the two features (add/remove)
+- One to the keyboard "enter key" event
+- One to the mouse "left click" event
+- Use your app methods in the different event listener callbacks
+
+> Think of a **todo element** as an object holding an **`id`** and a **`string`**
