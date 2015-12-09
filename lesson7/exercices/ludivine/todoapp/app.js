@@ -92,4 +92,3 @@ var a = main();
 a.firstClosure;
 a.secondClosure;
 a.thirdclosure;
-
