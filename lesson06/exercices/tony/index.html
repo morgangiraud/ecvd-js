@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function test() {
+            count = 0;
+
+            function increment() {
+                count++;
+            }
+
+            function decrement() {
+                count--;
+            }
+
+            function display() {
+                console.log(count);
+            }
+            
+            return {
+                increment: increment,
+                decrement: decrement,
+                display: display
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
