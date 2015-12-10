@@ -30,6 +30,39 @@ function initTodo() {
     var _this = this;
     var todos = [];
 
+    this.editAction = function(element, input, button) {
+        var value = input.value;
+        input.remove();
+        button.remove();
+
+        element.textContent = value;
+    };
+
+    this.editTodo = function(element) {
+
+        console.log(document.querySelectorAll('li input').length);
+
+        if(document.querySelectorAll('li input[type=text]').length === 0) {
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.value = element.textContent;
+
+            element.textContent = "";
+
+            element.appendChild(input);
+
+            var validate = document.createElement('button');
+            validate.textContent = "Edit";
+
+            validate.onclick = function() {
+                _this.editAction(element, input, this);
+            };
+
+            element.appendChild(validate);
+        }  
+    };
+
     this.removeTodo = function(element) {
 
         var indexToDelete = todos.indexOf(element.parentNode.textContent);
@@ -53,7 +86,6 @@ function initTodo() {
             var button_delete = document.createElement('button');
             button_delete.className = 'destroy';
 
-            // Delete function
             button_delete.onclick = function() {
                 _this.removeTodo(this);
             };
@@ -63,7 +95,6 @@ function initTodo() {
             toggle.type = 'checkbox';
             toggle.className = 'toggle';
 
-            // Toggle function
             toggle.onclick = function() {
                 _this.checkTodo(this);
             };
