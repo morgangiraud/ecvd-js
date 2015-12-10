@@ -142,5 +142,6 @@
 | Browser's module | **3** |
 | Webpack | **3** | 
 | Hot reloading | **3** | 
-| APIs | **3** |
+| APIs | **8** |
+| LocalStorage | **** |
 | Storing data clientside | **7** |
