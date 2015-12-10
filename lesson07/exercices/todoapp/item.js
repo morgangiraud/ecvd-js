@@ -3,7 +3,8 @@ var currentId = 0;
 function create(text){
   return {
     id: currentId++,
-    text: text
+    text: text,
+    done: false
   };
 }
 
