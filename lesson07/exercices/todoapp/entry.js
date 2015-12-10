@@ -34,6 +34,12 @@ var ul = document.querySelector("ul.todo-list");
 ul.addEventListener("click", function(e){
   if(e.target.nodeName === "BUTTON" && e.target.className === "destroy"){
     app.removeTodo(e.target.parentElement.parentElement.dataset.id); 
+    return
+  }
+
+  console.log(e.target.nodeName);
+  if(e.target.nodeName === "BUTTON"){
+
   }
 })
 
