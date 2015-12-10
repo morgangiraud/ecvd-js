@@ -132,7 +132,7 @@
 | Installing with NPM | **3** |
 | The file system module | **1** |
 | The HTTP module | **4** |
-| Streams | **7** |
+| Streams | **8** |
 | A simple file server | **1**, **3** | 
 | Error handling | **8**|
 
@@ -142,5 +142,6 @@
 | Browser's module | **3** |
 | Webpack | **3** | 
 | Hot reloading | **3** | 
-| APIs | **3** |
+| APIs | **8** |
+| LocalStorage | **** |
 | Storing data clientside | **7** |
