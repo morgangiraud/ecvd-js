@@ -25,41 +25,43 @@ function initTodo() {
 
 
 
+    var _this = this,
+        todos = [];
 
+    this.editTodo = function(li) {
 
-    var _this = this;
-    var todos = [];
-
-    this.editAction = function(element, input, button) {
-        var value = input.value;
-        input.remove();
-        button.remove();
-
-        element.textContent = value;
-    };
-
-    this.editTodo = function(element) {
-
-        console.log(document.querySelectorAll('li input').length);
-
+        // On vérifie qu'un input n'existe pas déjà pour ne pas regénérer l'input si on double click dessus
         if(document.querySelectorAll('li input[type=text]').length === 0) {
 
-            var input = document.createElement('input');
+            var input = document.createElement('input'),
+                validate = document.createElement('button');
+
             input.type = 'text';
-            input.value = element.textContent;
+            input.value = li.textContent;
 
-            element.textContent = "";
+            old_value = li.textContent;
 
-            element.appendChild(input);
-
-            var validate = document.createElement('button');
+            // On reset le texte de l'input
+            li.textContent = "";
+            li.appendChild(input);
+            
+            // Edit
             validate.textContent = "Edit";
 
             validate.onclick = function() {
-                _this.editAction(element, input, this);
+
+                var value = input.value;
+                input.remove();
+                this.remove();
+
+                li.textContent = value;
+
+                // On change dans le tableau
+                var indexToUpdate = todos.indexOf(element.parentNode.textContent);
+                if(indexToUpdate > -1) todos.splice(indexToUpdate,1);
             };
 
-            element.appendChild(validate);
+            li.appendChild(validate);
         }  
     };
 
@@ -73,48 +75,46 @@ function initTodo() {
     };
 
     this.addTodo = function() {
-        if(document.querySelector('.new-todo').value !== '') {
 
-            todos.push(document.querySelector('.new-todo').value);
-            console.log('todos', todos);
+        todos.push(document.querySelector('.new-todo').value);
+        console.log('todos', todos);
 
-            // Li
-            var li = document.createElement('li');
-            li.innerHTML = document.querySelector('.new-todo').value;
+        // Li
+        var li = document.createElement('li');
+        li.innerHTML = document.querySelector('.new-todo').value;
 
-            // Delete
-            var button_delete = document.createElement('button');
-            button_delete.className = 'destroy';
+        // Delete
+        var button_delete = document.createElement('button');
+        button_delete.className = 'destroy';
 
-            button_delete.onclick = function() {
-                _this.removeTodo(this);
-            };
+        button_delete.onclick = function() {
+            _this.removeTodo(this);
+        };
 
-            // Toggle
-            var toggle = document.createElement('input');
-            toggle.type = 'checkbox';
-            toggle.className = 'toggle';
+        // Toggle
+        var toggle = document.createElement('input');
+        toggle.type = 'checkbox';
+        toggle.className = 'toggle';
 
-            toggle.onclick = function() {
-                _this.checkTodo(this);
-            };
+        toggle.onclick = function() {
+            _this.checkTodo(this);
+        };
 
-            // Update function
-            li.ondblclick = function() {
-                _this.editTodo(this);
-            };
+        // Update function
+        li.ondblclick = function() {
+            _this.editTodo(this);
+        };
 
-            // Try Drag And Drop
+        // Try Drag And Drop
 
-            // Stock = li;
-            // Stock.addEventListener ("mousedown" , eleMouseDown , false);
-            
-            li.appendChild(button_delete);
-            li.appendChild(toggle);
+        // Stock = li;
+        // Stock.addEventListener ("mousedown" , eleMouseDown , false);
+        
+        li.appendChild(button_delete)
+          .appendChild(toggle);
 
-            document.querySelector('.todo-list').appendChild(li);
-            document.querySelector('.new-todo').value = '';
-        }
+        document.querySelector('.todo-list').appendChild(li);
+        document.querySelector('.new-todo').value = '';
     };
 
     this.checkTodo = function(element) {
@@ -130,8 +130,10 @@ function initTodo() {
     document.querySelector('.new-todo').addEventListener('keypress', function(e) {
         e = e || window.event;
 
+        // Lorsqu'on appuie sur entrée, on ajoute une tâche
         if(e.which === 13) {
-            _this.addTodo();
+            // On vérifie que la tâche rentrée ne soit pas vide
+            if(document.querySelector('.new-todo').value !== '') _this.addTodo();
         }
     });
 }
