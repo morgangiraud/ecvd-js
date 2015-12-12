@@ -7,10 +7,13 @@ document.querySelector(".new-todo").addEventListener("keypress", function(event)
 		var itemList = document.createTextNode(document.getElementsByClassName("new-todo")[0].value);
 		label.appendChild(itemList);
 		list.appendChild(label);
+
 		var done = document.createElement("input");
 		done.classList.add("toggle");
 		done.setAttribute("type", "checkbox");
 		list.appendChild(done);
+
+		var dragndrop = document.createElement("li");
 
 
 		document.getElementById("todo-list").appendChild(list);
@@ -42,10 +45,21 @@ addEventListener("click", function(event) {
 
 var dropper = document.querySelector(".draggable").addEventListener('dragstart', function(event) {
 
-	var drag = document.createElement('draggable');
+	raggableElement.addEventListener('dragstart', function(event) {
+
+    event.dataTransfer.setData('text/plain', "");
+
+}, false);
 
 
 })
+
+document.querySelector('#dropper').addEventListener('drop', function(event) {
+
+    event.preventDefault(); 
+
+
+}, false);
 
 
 function main() {
