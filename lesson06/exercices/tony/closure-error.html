@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CLosure error</title>
+    <style type="text/css">
+        body {
+            text-align: center;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="help">Helpful notes will appear here</p>
+    <p>E-mail:
+        <input type="text" id="email" name="email">
+    </p>
+    <p>Name:
+        <input type="text" id="name" name="name">
+    </p>
+    <p>Age:
+        <input type="text" id="age" name="age">
+    </p>
+
+    <script>
+        function setupHelp() {
+            var helpText = [
+                {
+                    'id': 'email',
+                    'help': 'Your e-mail address'
+                },
+                {
+                    'id': 'name',
+                    'help': 'Your full name'
+                },
+                {
+                    'id': 'age',
+                    'help': 'Your age (you must be over 16)'
+                }
+            ];
+
+
+            for (var i = 0; i < helpText.length; i++) {
+                var item = helpText[i];
+                document.getElementById(item.id).onfocus = function () {
+                    document.getElementById('help').innerHTML = item.help;
+                };
+            };
+        };
+        setupHelp();
+    </script>
+</body>
+
+</html>
