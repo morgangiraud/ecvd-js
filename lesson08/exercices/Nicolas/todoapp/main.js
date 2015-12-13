@@ -2,18 +2,19 @@ if(localStorage.length == 0){
 	localStorage.setItem('todos','[]');
 }
 
+var savedTextContent = null;
 var todos = JSON.parse(localStorage.todos);
-var field = document.querySelector('.new-todo');
-var list = document.querySelector('.todo-list');
+var input = document.querySelector('.new-todo');
+var ul = document.querySelector('.todo-list');
 
-function addItem(itemContent){
-	todos.push(itemContent);
+function addItem(textContent){
+	todos.push(textContent);
 	localStorage.todos = JSON.stringify(todos);
 }
 
-function deleteItem(itemContent){
+function deleteItem(textContent){
 	for(var i = 0; i < todos.length; i++){
-		if(itemContent == todos[i]){
+		if(textContent == todos[i]){
 			todos.splice(i,1);
 			localStorage.todos = JSON.stringify(todos);
 		}
@@ -24,45 +25,63 @@ function returnTodos(){
 	return localStorage.todos;
 }
 
-if(todos.length != 0){
-	for(var i = 0; i < todos.length; i++){
-		var item = document.createElement('li');
-		var button = document.createElement('button');
-
-		item.textContent = todos[i];
-
-		list.appendChild(item);
-		item.appendChild(button);
-
-		button.addEventListener('click', function (e){
-			var item = e.target.parentNode;
-			list.removeChild(item);
-
-			deleteItem(item.textContent);
-		}, false);
-	}
+function addEvents(li,span){
+	button.addEventListener('click', function (){
+		ul.removeChild(li);
+		deleteItem(span.textContent);
+	}, false);
 }
 
-field.addEventListener('keypress', function (e){
-	if(e.keyCode == 13 && field.value != ''){
-		var item = document.createElement('li');
+if(todos.length != 0){
+	for(var i = 0; i < todos.length; i++){
+		var li = document.createElement('li');
 		var span = document.createElement('span');
 		var button = document.createElement('button');
 
-		span.textContent = field.value;
+		span.textContent = todos[i];
+		button.textContent = 'x';
+		addEvents(li,span);
 
-		list.appendChild(item);
-		item.appendChild(span);
-		item.appendChild(button);
+		ul.appendChild(li);
+		li.appendChild(span);
+		li.appendChild(button);
+	}
+}
 
-		field.value = '';
-		addItem(item.textContent);
+input.addEventListener('keypress', function (e){
+	if(e.keyCode == 13 && input.value != ''){
+		var li = document.createElement('li');
+		var span = document.createElement('span');
+		var button = document.createElement('button');
 
-		button.addEventListener('click', function (e){
-			var item = e.target.parentNode;
-			list.removeChild(item);
-
-			deleteItem(item.textContent);
+		span.textContent = input.value;
+		span.addEventListener('dblclick', function (){
+			span.contentEditable = true;
+			span.focus();
+			savedTextContent = span.textContent;
 		}, false);
+
+		span.addEventListener('keypress', function (e){
+			if(e.keyCode == 13 && span.textContent != ''){
+				span.contentEditable = false;
+				if(span.textContent != savedTextContent){
+					console.log(span.textContent);
+					console.log(savedTextContent);
+				}
+			}
+		}, false);
+
+		button.textContent = 'x';
+		button.addEventListener('click', function (){
+			ul.removeChild(li);
+			deleteItem(span.textContent);
+		}, false);
+
+		ul.appendChild(li);
+		li.appendChild(span);
+		li.appendChild(button);
+
+		input.value = '';
+		addItem(span.textContent);
 	}
 }, false);
