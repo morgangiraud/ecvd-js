@@ -14,25 +14,20 @@
         padding: 20px 0 20px 20px;
       }
       .todo-list li button{
-        display: none;
         position: absolute;
         top: 50%;
         right: 20px;
         z-index: 10;
         width: 20px;
         height: 20px;
-        margin-top: -12px;
-        font-size: 28px;
-        font-weight: normal;
-        line-height: 20px;
-        color: #cc9a9a;
+        margin-top: -10px;
+        background: url(img/ico-close.svg) no-repeat center center;
+        opacity: 0;
         cursor: pointer;
+        transition: all 0.2s ease-out 0s;
       }
       .todo-list li:hover button{
-        display: block;
-      }
-      .todo-list li:hover button:hover{
-        color: #af5b5e;
+        opacity: 1;
       }
     </style>
   </head>

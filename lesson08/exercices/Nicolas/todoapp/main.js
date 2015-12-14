@@ -1,3 +1,4 @@
+"use strict";
 if(localStorage.length == 0){
 	localStorage.setItem('todos','[]');
 }
@@ -6,13 +7,25 @@ var savedTextContent = null;
 var todos = JSON.parse(localStorage.todos);
 var input = document.querySelector('.new-todo');
 var ul = document.querySelector('.todo-list');
+var li = null;
+var span = null;
+var button = null;
 
 function addItem(textContent){
 	todos.push(textContent);
 	localStorage.todos = JSON.stringify(todos);
 }
 
-function deleteItem(textContent){
+function editableItem(textContent){
+	for(var i = 0; i < todos.length; i++){
+		if(savedTextContent == todos[i]){
+			todos.splice(i,1,textContent);
+			localStorage.todos = JSON.stringify(todos);
+		}
+	}
+}
+
+function removeItem(textContent){
 	for(var i = 0; i < todos.length; i++){
 		if(textContent == todos[i]){
 			todos.splice(i,1);
@@ -21,26 +34,46 @@ function deleteItem(textContent){
 	}
 }
 
-function returnTodos(){
-	return localStorage.todos;
+function check(textContent){
+	var duplicate = false;
+	for(var i = 0; i < todos.length; i++){
+		if(textContent == todos[i] || textContent == ''){
+			duplicate = true;
+		}
+	}
+	return duplicate;
 }
 
-function addEvents(li,span){
+function addEvents(li,span,button){
+	span.addEventListener('dblclick', function (){
+		span.contentEditable = true;
+		span.focus();
+		savedTextContent = span.textContent;
+	}, false);
+
+	span.addEventListener('keypress', function (e){
+		if(e.keyCode == 13 && span.textContent != ''){
+			span.contentEditable = false;
+			if(span.textContent != savedTextContent){
+				editableItem(span.textContent);
+			}
+		}
+	}, false);
+	
 	button.addEventListener('click', function (){
 		ul.removeChild(li);
-		deleteItem(span.textContent);
+		removeItem(span.textContent);
 	}, false);
 }
 
 if(todos.length != 0){
 	for(var i = 0; i < todos.length; i++){
-		var li = document.createElement('li');
-		var span = document.createElement('span');
-		var button = document.createElement('button');
+		li = document.createElement('li');
+		span = document.createElement('span');
+		button = document.createElement('button');
 
 		span.textContent = todos[i];
-		button.textContent = 'x';
-		addEvents(li,span);
+		addEvents(li,span,button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
@@ -49,33 +82,13 @@ if(todos.length != 0){
 }
 
 input.addEventListener('keypress', function (e){
-	if(e.keyCode == 13 && input.value != ''){
-		var li = document.createElement('li');
-		var span = document.createElement('span');
-		var button = document.createElement('button');
+	if(e.keyCode == 13 && !check(input.value)){
+		li = document.createElement('li');
+		span = document.createElement('span');
+		button = document.createElement('button');
 
 		span.textContent = input.value;
-		span.addEventListener('dblclick', function (){
-			span.contentEditable = true;
-			span.focus();
-			savedTextContent = span.textContent;
-		}, false);
-
-		span.addEventListener('keypress', function (e){
-			if(e.keyCode == 13 && span.textContent != ''){
-				span.contentEditable = false;
-				if(span.textContent != savedTextContent){
-					console.log(span.textContent);
-					console.log(savedTextContent);
-				}
-			}
-		}, false);
-
-		button.textContent = 'x';
-		button.addEventListener('click', function (){
-			ul.removeChild(li);
-			deleteItem(span.textContent);
-		}, false);
+		addEvents(li,span,button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
