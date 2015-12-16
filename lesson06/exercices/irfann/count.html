@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	function main(){
+		var count = 0;
+
+		function incrementer () {
+			count++;
+		}
+		function decrementer () {
+			count--;
+		}
+		function display () {
+			console.log(count);
+		}
+
+		var objet = {
+			incrementer: incrementer,
+			decrementer: decrementer,
+			display: display
+		}
+
+		return objet;
+	}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

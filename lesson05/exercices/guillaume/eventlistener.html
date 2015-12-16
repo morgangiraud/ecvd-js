@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="sweetalert.css" />
+
+<style>
+	
+	.gad {
+		background-color: #BADA55;
+		border: none;
+		box-shadow: none;
+		width: 300px;
+		height: 100px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-left: -150px;
+		margin-top: -50px;
+		border: solid 2px #fff;
+		cursor: pointer;
+		color: white;
+		outline-style: none;
+		transition: 0.4s;
+	}
+
+	.gad:hover {
+		background-color: #fff;
+		color: #BADA55;
+		border-color: #BADA55;
+	}
+</style>
+
+<button class="gad">Aw My Gad</button>
+<script src="sweetalert.min.js"></script> 
+<script>
+
+	// var gad = document.getElementsByClassName('gad')[0];
+	var gad = document.querySelector('.gad');
+
+	gad.addEventListener('click', function() {
+		swal({
+			title: 'Oh Yeah',
+			type: 'success'
+		});
+		console.log(gad);
+	});
+
+</script>

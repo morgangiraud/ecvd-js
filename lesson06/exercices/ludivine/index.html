@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> </title>
+</head>
+<body>
+
+<script>
+
+function main() {
+
+	var count = 0;
+
+	function increment(){
+
+		count++;
+	}
+
+	function decrement() {
+
+		count--;
+	}
+
+	function log () {
+
+		console.log(count);
+	}
+
+	return {
+
+		firstClosure: increment,
+		secondClosure: decrement,
+		thirdclosure:log
+	}
+}
+
+</script>
+
+</body>
+</html>

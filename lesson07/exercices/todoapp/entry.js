@@ -37,9 +37,12 @@ ul.addEventListener("click", function(e){
     return
   }
 
-  console.log(e.target.nodeName);
-  if(e.target.nodeName === "BUTTON"){
-
+  if(e.target.nodeName === "INPUT" && e.target.className === "toggle"){
+    if(e.target.checked){
+      app.done(e.target.parentElement.parentElement.dataset.id)
+    } else {
+      app.undone(e.target.parentElement.parentElement.dataset.id)
+    }
   }
 })
 
