@@ -46,6 +46,7 @@ function check(textContent){
 
 function addEvents(li,span,button){
 	span.addEventListener('dblclick', function (){
+		button.style.display = 'none';
 		span.contentEditable = true;
 		span.focus();
 		savedTextContent = span.textContent;
@@ -53,6 +54,7 @@ function addEvents(li,span,button){
 
 	span.addEventListener('keypress', function (e){
 		if(e.keyCode == 13 && span.textContent != ''){
+			button.style.display = 'block';
 			span.contentEditable = false;
 			if(span.textContent != savedTextContent){
 				editableItem(span.textContent);
