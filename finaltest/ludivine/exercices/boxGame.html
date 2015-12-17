@@ -28,16 +28,30 @@
         top:0;
         font-size: 24px;
       }
-      #highScores{
+      #highscores{
         display: none;
+        z-index: 1000;
         position: absolute;
         top: 10%;
         left: 10%;
-        width: 80%;
-        height: 80%;
+        width: 500px;
+        height: 500px;
+      }
+      #scoreTable {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #restart {
+        width: 300px;
+        height: 150px;
+        line-height: 150px;
+        background-color: #7E8F7C;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
       }
       #start{
-        /*display: none;*/
         position: absolute;
         z-index: 1000;
         background-color: #7E8F7C;
@@ -56,7 +70,10 @@
     <div id="timer">Time left: 0</div>
     <div id="start">Start !</div>
     <div id="playground"></div>
-    <div id="highscores"></div>
+    <div id="highscores">
+    <div id="scoreTable"></div>
+    <div id="restart">Restart</div>
+    </div>
     <script type="text/javascript" charset="utf-8">
     function init(){
       var score = 0;
@@ -66,10 +83,43 @@
       var height = 500;
       var hardeningCoef = 0.9;
       var highscores = [];
+
+
+      function nextTurn() {
+
+        document.getElementById("start").addEventListener("click", function(event) {
+
+            var score = document.getElementById("score");
+        })
+       }
+
+      }
+
+      function restart() {
+
+
+
+       function incrementScore () {
+
+                    score++;
+                    document.getElementById().innerHTML = "Score";
+       }
+ 
+       function startTimer () {
+
+                setInterval(function timer(), 10000);
+       }
+
+       function endGame() {
+
+        var name = prompt ("Please, enter your name");
+          alert(name);
+       }
     }
 
     // init
     app = init();
+
     </script>
   </body>
 </html>
