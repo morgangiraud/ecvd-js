@@ -28,16 +28,30 @@
         top:0;
         font-size: 24px;
       }
-      #highScores{
+      #highscores{
         display: none;
+        z-index: 1000;
         position: absolute;
         top: 10%;
         left: 10%;
-        width: 80%;
-        height: 80%;
+        width: 500px;
+        height: 500px;
+      }
+      #scoreTable {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #restart {
+        width: 300px;
+        height: 150px;
+        line-height: 150px;
+        background-color: #7E8F7C;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
       }
       #start{
-        /*display: none;*/
         position: absolute;
         z-index: 1000;
         background-color: #7E8F7C;
@@ -56,13 +70,16 @@
     <div id="timer">Time left: 0</div>
     <div id="start">Start !</div>
     <div id="playground"></div>
-    <div id="highscores"></div>
+    <div id="highscores">
+      <div id="scoreTable"></div>
+      <div id="restart">Restart</div>
+    </div>
     <script type="text/javascript" charset="utf-8">
     function init(){
       var score = 0;
       var maxTime = 10000;
       var timer = null;
-      var width = 500;
+      var width = 100;
       var height = 500;
       var hardeningCoef = 0.9;
       var highscores = [];
@@ -71,17 +88,115 @@
         score = 0;
         maxTime = 10000;
         timer = null;
-        width = 500;
+        width = 100;
         height = 500;
         hardeningCoef = 0.9;
         highscores = [];
       }
+
+      function getRandomInBetween(min,max){
+        return Math.floor(Math.random() * max) + min;
+      }
+
+      function generateNewSquare(){
+        var box = document.createElement("div");
+        box.className = "box";
+        box.style.top = getRandomInBetween(0,window.innerHeight);
+        box.style.left = getRandomInBetween(0,window.innerHeight);
+        box.style.width = getRandomInBetween(0,window.innerHeight);
+        box.style.height = getRandomInBetween(0,window.innerHeight);
+
+
+        document.getElementById("playground").innerHTML = "";
+        document.getElementById("playground").appendChild(box);
+        console.log(document.getElementById("playground"));
+      }
+
+      function nextTurn(){
+        incrementScore();
+        startTimer();
+        makeTheGameHarder();
+        generateNewSquare();
+      }
+
+      function makeTheGameHarder(){
+        if(Math.random() < 0.5){
+          height-Math.random()*200;
+        }else if(Math.random() < 0.5){
+          maxTime-Math.random()*200;
+
+        }
+      }
+
+      function incrementScore () {
+        score++;
+        document.getElementById("score").innerHTML = "Score:" + score;
+      }
+
+      function startTimer(){
+        var inter = setInterval(function(){
+            maxTime-=1;
+            document.getElementById("timer").innerHTML = "Time left:" + maxTime;
+            if(maxTime==0){
+              clearInterval(inter);
+              endgame();
+            }
+        },10);
+        
+      }
+
+      function endgame(){
+        var person = prompt("Please enter your name", "");
+        var players = [];
+         try {
+          if (JSON.parse(localStorage.player).length > 0) {
+              players= JSON.parse(localStorage.player);
+          }
+        } catch (error) {}
+        players.push({
+          name:person,
+          score: score
+        })
+        localStorage.player = JSON.stringify(players);
+        load();
+      }
+
+      function load(){
+        document.getElementById("highscores").style.display = "block";
+        players= JSON.parse(localStorage.player);
+        console.log(players);
+        for (var i = 0; i < players.length; i++) {
+         document.getElementById("scoreTable").innerHTML += document.getElementById("scoreTable").innerHTML + "<br>" +players[i].score;
+        };
+      }
+
+      object = {
+        restart:restart,
+        nextTurn:nextTurn,
+        load:load
+      }
+
+      return object;
     }
 
     // init
     app = init();
 
-    console.log(document.getElementbyId("start"));
+    document.querySelector("#start").addEventListener('click', function (e) {
+      app.restart();
+        app.nextTurn();
+
+    });
+
+     document.querySelector("#restart").addEventListener('click', function (e) {
+      app.restart();
+    });
+
+     addEventListener('click', function (e) {
+      if(e.target.className == "box"){
+          app.nextTurn();
+        }
+      });
     </script>
   </body>
 </html>
