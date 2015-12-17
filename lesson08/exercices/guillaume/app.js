@@ -1,32 +1,156 @@
 module.exports = initTodo;
 
+function pauseEvent(e) {
+    if(e.stopPropagation) e.stopPropagation();
+    if(e.preventDefault) e.preventDefault();
+    e.cancelBubble=true;
+    e.returnValue=false;
+    return false;
+}
+
+function offset(elt) {
+    var rect = elt.getBoundingClientRect(), bodyElt = document.body;
+    return {
+        top: rect.top + bodyElt .scrollTop,
+        left: rect.left + bodyElt .scrollLeft
+    }
+}
+
 function initTodo() {
 
-    // var Stock;
-
-    // function eleMouseDown () {
-    //     stateMouseDown = true;
-    //     document.addEventListener ("mousemove" , eleMouseMove , false);
-    // }
-
-    // function eleMouseMove (ev) {
-    //     var pX = ev.pageX;
-    //     var pY = ev.pageY;
-    //     Stock.style.left = pX + "px";
-    //     Stock.style.top = pY + "px";
-    //     document.addEventListener ("mouseup" , eleMouseUp , false);
-    // }
-
-    // function eleMouseUp () {
-    //     document.removeEventListener ("mousemove" , eleMouseMove , false);
-    //     document.removeEventListener ("mouseup" , eleMouseUp , false);
-    // }
-
-
-
-
-    var _this = this,
+    var drag_target = '',
+        clicking = false,
+        previous_top,
+        first_top,
+        _this = this,
         todos = [];
+
+    this.getUpElement = function() {
+        var all_li = document.querySelectorAll('li'),
+            upElem = '';
+
+        for (var i = 0; i < all_li.length; i++) {
+
+            if(offset(all_li[i]).top > offset(drag_target).top) {
+                // Si un element est plus haut que le drag
+
+                // Si c'est le premier element plus haut, il devient upElem
+                if(upElem === '') {
+                    upElem = all_li[i];
+
+                // Sinon, on regarde si il est plus bas que upElem . Si oui, il devient upElement
+                } else {
+                    if(offset(all_li[i]).top < offset(upElem).top) {
+                        upElem = all_li[i];
+                    }
+                }
+            }
+        }
+
+        if(upElem !== '') return upElem;
+        return false;
+    };
+
+    this.getBottomElement = function() {
+        var all_li = document.querySelectorAll('li'),
+            bottomElem = '';
+
+        for (var i = 0; i < all_li.length; i++) {
+
+            if(offset(all_li[i]).top < offset(drag_target).top) {
+                // Si un element est plus haut que le drag
+
+                // Si c'est le premier element plus haut, il devient bottomElem
+                if(bottomElem === '') {
+                    bottomElem = all_li[i];
+
+                // Sinon, on regarde si il est plus bas que bottomElem . Si oui, il devient bottomElement
+                } else {
+                    if(offset(all_li[i]).top > offset(bottomElem).top) {
+                        bottomElem = all_li[i];
+                    }
+                }
+            }
+        }
+
+        if(bottomElem !== '') return bottomElem;
+        return false;
+    };
+
+    document.addEventListener('mousedown', function(e) {
+
+        if(e.target.localName === 'li') {
+
+            drag_target = e.target;
+            clicking = true;
+
+            drag_target.classList.add('moving');
+            first_top = e.clientY;
+            // drag_target.style.top = (e.clientY-20) + 'px';
+
+            console.log('mousedown');
+        }
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if(!clicking) return;
+
+        e=e || window.event;
+        pauseEvent(e);
+
+
+        drag_target.style.top = parseInt(drag_target.style.top.slice(0, -2)) + (first_top - e.clientY) + 'px';
+
+        console.log(drag_target.style.top);
+
+        previous_top = offset(drag_target).top;
+    });
+
+    document.addEventListener('mouseup', function(e) {
+
+        if(drag_target === '') return;
+
+        if(clicking) {
+
+            if(offset(drag_target).top > previous_top) {
+                // Il descend
+
+                var bottomElem = _this.getBottomElement();
+
+                if(bottomElem !== false) {
+                    var currentOrder = drag_target.style.order;
+                    drag_target.style.order = bottomElem.style.order;
+
+                    bottomElem.style.order = currentOrder;
+                } else {
+                    console.log(bottomElem);
+                }
+
+            } else {
+                // Il monte
+
+                var upElem = _this.getUpElement();
+
+                if(upElem !== false) {
+                    var currentOrder = drag_target.style.order;
+                    drag_target.style.order = upElem.style.order;
+
+                    upElem.style.order = currentOrder;
+                } else {
+                    console.log(upElem);
+                }
+
+            }
+
+            drag_target.style.top = '0px';
+            drag_target.classList.remove('moving');
+            drag_target = '';
+        }
+
+        clicking = false;
+    });
+
+    
 
     this.editTodo = function(li) {
 
@@ -82,6 +206,7 @@ function initTodo() {
         // Li
         var li = document.createElement('li');
         li.innerHTML = document.querySelector('.new-todo').value;
+        li.style.order = todos.length;
 
         // Delete
         var button_delete = document.createElement('button');
