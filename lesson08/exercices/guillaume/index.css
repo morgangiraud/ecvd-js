@@ -167,6 +167,8 @@ label[for='toggle-all'] {
   margin: 0;
   padding: 0;
   list-style: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .todo-list li {
@@ -174,6 +176,10 @@ label[for='toggle-all'] {
   font-size: 24px;
   padding: 10px;
   border-bottom: 1px solid #ededed;
+  cursor: -webkit-grab;
+  cursor: move;
+  top: 0px;
+  height: 40px;
 }
 
 .todo-list li:last-child {
