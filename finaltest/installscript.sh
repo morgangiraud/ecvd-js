@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Executing the script from the url
-# curl -s https://raw.githubusercontent.com/morgangiraud/ecvd-js/master/finaltest/installscript.sh | bash /dev/stdin name
+# curl -s https://raw.githubusercontent.com/morgangiraud/ecvd-js/master/finaltest/installscript.sh | bash /dev/stdin
 
 if [ -z "$1" ]; then
   echo "No argument supplied"

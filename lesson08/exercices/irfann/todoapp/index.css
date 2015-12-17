@@ -21,27 +21,6 @@ button {
   font-smoothing: antialiased;
 }
 
-button {
-  padding: 5px;
-  border: solid 1px black;
-  margin-left: 50px;
-  cursor: pointer;
-}
-
-button.delete {
-  color: red;
-  background-image: url('delete-xxl.png');
-  width: 60px;
-  height: 60px;
-  background-size: 50% 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-button.edit {
-  color: green;
-}
-
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
@@ -167,19 +146,12 @@ label[for='toggle-all'] {
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-direction: column;
 }
 
 .todo-list li {
   position: relative;
   font-size: 24px;
-  padding: 10px;
   border-bottom: 1px solid #ededed;
-  cursor: -webkit-grab;
-  cursor: move;
-  top: 0px;
-  height: 40px;
 }
 
 .todo-list li:last-child {
@@ -205,9 +177,6 @@ label[for='toggle-all'] {
 .todo-list li .toggle {
   text-align: center;
   width: 40px;
-  left: 100px;
-  background-color: blue;
-  
   /* auto, since non-WebKit browsers doesn't support input styling */
   height: auto;
   position: absolute;
@@ -262,7 +231,7 @@ label[for='toggle-all'] {
 }
 
 .todo-list li .destroy:after {
-  content: 'Ã—';
+  content: 'X';
 }
 
 .todo-list li:hover .destroy {
@@ -374,6 +343,24 @@ html .clear-completed:active {
 
 .info a:hover {
   text-decoration: underline;
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
+}
+
+#dropzone{
+  cursor: move;
+}
+
+#dropzone.over {
+  border: 2px dashed #000;
 }
 
 /*

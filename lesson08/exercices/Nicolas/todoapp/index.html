@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+      .todo-list li{
+        padding-right: 60px;
+      }
+      .todo-list li span{
+        display: block;
+        padding: 20px 0 20px 20px;
+      }
+      .todo-list li button{
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        z-index: 10;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        background: url(img/ico-close.svg) no-repeat center center;
+        opacity: 0;
+        cursor: pointer;
+        transition: all 0.2s ease-out 0s;
+      }
+      .todo-list li:hover button{
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="todoapp">
+      <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?" autofocus>
+      </header>
+      <section class="main">
+        <ul class="todo-list"></ul>
+      </section>
+      <footer class="footer">
+        <span class="todo-count"></span>
+      </footer>
+    </section>
+    <footer class="info">
+    </footer>
+    <!--<script src="bundle.js"></script>-->
+    <script src="main.js"></script>
+  </body>
+</html>
