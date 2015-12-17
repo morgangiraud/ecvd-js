@@ -92,4 +92,6 @@ If you think you need to add any extra functions or data, feel free to do so.
   - Make an awesome highscore! 
 
 # Conclusion (Mandatory)
+- Open the chrome console and copy the JSON string hold by `localStorage`
+  - Past the string into a `localStorage.json` file
 - Use git to push all your work on the remote repository
