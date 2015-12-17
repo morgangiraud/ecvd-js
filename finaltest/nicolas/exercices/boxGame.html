@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+        background-color: #FDF3E7;
+      }
+      #playground{
+        width:100%;
+        height: 100%;
+      }
+      .box {
+        position: absolute;
+        border: 0px;
+        background-color: #C63D0F;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #score{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size: 24px;
+      }
+      #timer{
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 24px;
+      }
+      #highScores{
+        display: none;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+      }
+      #start{
+        /*display: none;*/
+        position: absolute;
+        z-index: 1000;
+        background-color: #7E8F7C;
+        top: 5%;
+        left: 30%;
+        width: 300px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time left: 0</div>
+    <div id="start">Start !</div>
+    <div id="playground"></div>
+    <div id="highscores"></div>
+    <script type="text/javascript" charset="utf-8">
+    function init(){
+      var score = 0;
+      var maxTime = 10000;
+      var timer = null;
+      var width = 500;
+      var height = 500;
+      var hardeningCoef = 0.9;
+      var highscores = [];
+    }
+
+    // init
+    app = init();
+    </script>
+  </body>
+</html>
