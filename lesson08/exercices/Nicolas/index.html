@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>Exercices Closures</title>
+</head>
+<body>
+	<script>
+		var count = 0;
+		function main(){
+
+			function incrementCount(){
+				count++;
+			}
+			function decrementCount(){
+				count--;
+			}
+			function logValue(){
+				console.log(count);
+			}
+
+			//return [incrementCount, decrementCount, logValue];
+
+			return {
+				incrementCount: incrementCount,
+				decrementCount: decrementCount,
+				logValue: logValue
+			};
+		}
+
+		var objectClosure = main();
+		var objectClosure2 = main();
+	</script>
+</body>
+</html>
