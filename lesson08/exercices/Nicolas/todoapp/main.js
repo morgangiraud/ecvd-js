@@ -36,7 +36,7 @@ function removeItem(textContent){
 
 function check(textContent){
 	var duplicate = false;
-	for(var i = 0; i < todos.length; i++){
+	for(var i = 0; i <= todos.length; i++){
 		if(textContent == todos[i] || textContent == ''){
 			duplicate = true;
 		}
@@ -44,7 +44,7 @@ function check(textContent){
 	return duplicate;
 }
 
-function addEvents(li,span,button){
+function addEvents(li, span, button){
 	span.addEventListener('dblclick', function (){
 		button.style.display = 'none';
 		span.contentEditable = true;
@@ -53,12 +53,24 @@ function addEvents(li,span,button){
 	}, false);
 
 	span.addEventListener('keypress', function (e){
-		if(e.keyCode == 13 && span.textContent != ''){
+		if(e.keyCode == 13 && !check(span.textContent)){
 			button.style.display = 'block';
 			span.contentEditable = false;
 			if(span.textContent != savedTextContent){
 				editableItem(span.textContent);
 			}
+		}
+	}, false);
+
+	span.addEventListener('blur', function (){
+		if(!check(span.textContent)){
+			button.style.display = 'block';
+			span.contentEditable = false;
+			if(span.textContent != savedTextContent){
+				editableItem(span.textContent);
+			}
+		} else{
+			span.focus();
 		}
 	}, false);
 	
@@ -75,7 +87,7 @@ if(todos.length != 0){
 		button = document.createElement('button');
 
 		span.textContent = todos[i];
-		addEvents(li,span,button);
+		addEvents(li, span, button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
@@ -90,7 +102,7 @@ input.addEventListener('keypress', function (e){
 		button = document.createElement('button');
 
 		span.textContent = input.value;
-		addEvents(li,span,button);
+		addEvents(li, span, button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
