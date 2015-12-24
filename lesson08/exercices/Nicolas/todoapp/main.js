@@ -69,8 +69,6 @@ function addEvents(li, span, button){
 			if(span.textContent != savedTextContent){
 				editableItem(span.textContent);
 			}
-		} else{
-			span.focus();
 		}
 	}, false);
 	
