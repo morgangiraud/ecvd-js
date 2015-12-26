@@ -44,18 +44,9 @@ var proxy = http.createServer(function (browserRequest, proxyResponse) {
     		
   		});
  
-<<<<<<< HEAD
-
       websiteResponse.on('end', function() {
     		proxyResponse.end(dataAll);
     	});
-=======
-      websiteResponse.on('end', function() {
-    		proxyResponse.end(dataAll);
-        //websiteResponse.header 
-    	});
-
->>>>>>> a892f00e9fbcc6ceec94cf8b188d9e26bb7bc1ef
     });
       console.log(browserRequest.url);
 

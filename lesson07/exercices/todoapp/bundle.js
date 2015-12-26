@@ -54,14 +54,19 @@
 	      <input class="new-todo" placeholder="What needs to be done?" autofocus> \
 	    </header> \
 	    <section class="main"> \
-	      <ul class="todo-list"></ul> \
+	      <ul class="todo-list" droppable="true"></ul> \
 	    </section> \
 	    <footer class="footer"> \
-	      <span class="todo-count"></span> \
-	    </footer> \
+	        <span class="todo-count"></span> \
+	        <ul class="filters"> \
+	          <li> <a href="#/" class="selected">All</a> </li> \
+	          <li> <a href="#/active">Active</a> </li> \
+	          <li> <a href="#/completed">Completed</a> </li> \
+	        </ul> \
+	        <button class="clear-completed">Clear completed</button> \
+	      </footer> \
 	  </section> \
-	  <footer class="info">\
-	  </footer>'
+	  '
 	);
 
 	var init = __webpack_require__(7);
@@ -83,9 +88,12 @@
 	    return
 	  }
 
-	  console.log(e.target.nodeName);
-	  if(e.target.nodeName === "BUTTON"){
-
+	  if(e.target.nodeName === "INPUT" && e.target.className === "toggle"){
+	    if(e.target.checked){
+	      app.done(e.target.parentElement.parentElement.dataset.id)
+	    } else {
+	      app.undone(e.target.parentElement.parentElement.dataset.id)
+	    }
 	  }
 	})
 
@@ -502,42 +510,84 @@
 	function initTodo(){
 	  "strict"
 
+	  var dbName = "ecvd-todo";
 	  var todos = [];
 	  var ul = document.querySelector("ul.todo-list");
+	  var filters = document.querySelector("ul.filters");
 
 	  function addTodo(todoText){
 	    todos.push(item.create(todoText));
 	    refresh();
 	  }
 
-	  function removeTodo(todoId){
-	    if (typeof(todoId) === 'object' && todoId.id != null){
-	      todoId = todoId.id;
+	  function swapTodos(todoId, switchId){
+	    var index = getTodoIndex(todoId);
+	    var swappedIndex = getTodoIndex(switchId);
+	    if(index !== -1 && swappedIndex !== -1){
+	      var swappedTodo = todos[swappedIndex];
+	      todos.splice(swappedIndex, 1, todos[index]);
+	      todos.splice(index, 1, swappedTodo);
 	    }
-	    todoId = parseInt(todoId, 10);
+	  }
 
-	    for (var i = todos.length - 1; i >= 0; i--) {
-	      if(todos[i].id === todoId){
-	        todos.splice(i, 1);
-	      }
-	    };
+	  function removeTodo(todoId){
+	    var index = getTodoIndex(todoId);
+	    if(index !== -1){
+	      todos.splice(index, 1);
+	    }
 
-	    refresh();  
+	    refresh();
+	  }
+
+	  function done(todoId){
+	    var index = getTodoIndex(todoId);
+	    if(index !== -1){
+	      todos[index].done = true;
+	      var node = ul.querySelector("li[data-id=\"" + todoId + "\"]");
+	      node.className = "completed";
+	    }
+	  }
+
+	  function undone(todoId){
+	    var index = getTodoIndex(todoId);
+	    if(index !== -1){
+	      todos[index].done = false;
+	      var node = ul.querySelector("li[data-id=\"" + todoId + "\"]");
+	      node.className = "";
+	    }
 	  }
 
 	  function refresh(){
-	    str = "";
+	    strArray = [];
 	    for (var i = todos.length - 1; i >= 0; i--) {
-	      str += '\
-	        <li data-id="' + todos[i].id + '" class=""> \
-	          <div class="view">\
-	            <label>' + todos[i].text + '</label>\
-	            <button class="destroy"></button>\
-	          </div>\
-	        </li>';
+	      console.log(todos[i].done);
+	      strArray.push('<li data-id="' + todos[i].id + '" class="' + (todos[i].done ? "completed" : "") + '" draggable="true">');
+	      strArray.push('<div class="view">');
+	      if(todos[i].done){
+	        strArray.push('<input class="toggle" type="checkbox" checked>');
+	      } else {
+	        strArray.push('<input class="toggle" type="checkbox">');  
+	      }
+	      strArray.push('<label>' + todos[i].text + '</label>');  
+	      strArray.push('<button class="destroy"></button>');  
+	      strArray.push('</div>');  
+	      strArray.push('</li>');  
 	    }
 
-	    ul.innerHTML = str;
+	    ul.innerHTML = strArray.join('');
+	    var $lis = ul.querySelectorAll('li')
+	    for (var i = $lis.length - 1; i >= 0; i--) {
+	      $lis[i].addEventListener("drag", function(e){
+	        if(e.clientX !== 0 && e.clientY !== 0){ //When you release the drag this event is called one last time
+	          if(this.previousSibling && e.offsetY < 0){
+	            swap(this, "before");
+	          }
+	          if(this.nextSibling && e.offsetY > this.getBoundingClientRect().height){
+	            swap(this, "after");
+	          }
+	        }
+	      });
+	    };
 	  }
 	  
 	  // Hot reloading helpers
@@ -550,12 +600,43 @@
 	    refresh();
 	  }
 
+	  // Private
+	  function getTodoIndex(todoId){
+	    if (typeof(todoId) === 'object' && todoId.id != null){
+	      todoId = todoId.id;
+	    }
+	    todoId = parseInt(todoId, 10);
+
+	    for (var i = todos.length - 1; i >= 0; i--) {
+	      if(todos[i].id === todoId){
+	        return i;
+	      }
+	    };
+	    return -1;
+	  }
+
+	  function swap(elem, type){
+	    switch(type){
+	      case "after":
+	        swapTodos(elem.getAttribute("data-id"), elem.nextSibling.getAttribute("data-id"));
+	        elem.parentNode.insertBefore(elem.nextSibling, elem);
+	        break;
+	      case "before":
+	      default:
+	        swapTodos(elem.getAttribute("data-id"), elem.previousSibling.getAttribute("data-id"));
+	        elem.parentNode.insertBefore(elem,elem.previousSibling);
+	        break;
+	    }
+	  }
+
 	  return {
 	    addTodo: addTodo,
 	    removeTodo: removeTodo,
 	    refresh: refresh,
 	    getTodos: getTodos,
-	    setTodos: setTodos
+	    setTodos: setTodos,
+	    done: done,
+	    undone: undone
 	  }
 	}
 
@@ -582,7 +663,8 @@
 	function create(text){
 	  return {
 	    id: currentId++,
-	    text: text
+	    text: text,
+	    done: false
 	  };
 	}
 

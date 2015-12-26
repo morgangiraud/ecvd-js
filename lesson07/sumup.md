@@ -11,5 +11,8 @@
 - Array functions
 
 ## Exercice
+- First implementation of a simple todo list
+    - The done/undone feature
+    - Drag and dropping todos
 - Read the eloquent javascript page 68 - 69
 - Read the eloquent javascript page 76 - 82

@@ -8,14 +8,19 @@ document.write('\
       <input class="new-todo" placeholder="What needs to be done?" autofocus> \
     </header> \
     <section class="main"> \
-      <ul class="todo-list"></ul> \
+      <ul class="todo-list" droppable="true"></ul> \
     </section> \
     <footer class="footer"> \
-      <span class="todo-count"></span> \
-    </footer> \
+        <span class="todo-count"></span> \
+        <ul class="filters"> \
+          <li> <a href="#/" class="selected">All</a> </li> \
+          <li> <a href="#/active">Active</a> </li> \
+          <li> <a href="#/completed">Completed</a> </li> \
+        </ul> \
+        <button class="clear-completed">Clear completed</button> \
+      </footer> \
   </section> \
-  <footer class="info">\
-  </footer>'
+  '
 );
 
 var init = require("./app.js");
