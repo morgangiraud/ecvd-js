@@ -52,23 +52,27 @@ function addEvents(li, span, button){
 		savedTextContent = span.textContent;
 	}, false);
 
-	span.addEventListener('keypress', function (e){
-		if(e.keyCode == 13 && !check(span.textContent)){
-			button.style.display = 'block';
-			span.contentEditable = false;
-			if(span.textContent != savedTextContent){
-				editableItem(span.textContent);
-			}
-		}
-	}, false);
+	// span.addEventListener('keypress', function (e){
+	// 	if(e.keyCode == 13 && !check(span.textContent) && span.textContent != savedTextContent){
+	// 		span.contentEditable = false;
+	// 		button.style.display = 'block';
+	// 		editableItem(span.textContent);
+	// 	} else if(e.keyCode == 13 && check(span.textContent) || span.textContent == savedTextContent){
+	// 		span.contentEditable = false;
+	// 		button.style.display = 'block';
+	// 		span.textContent = savedTextContent;
+	// 	}
+	// }, false);
 
 	span.addEventListener('blur', function (){
 		if(!check(span.textContent)){
-			button.style.display = 'block';
 			span.contentEditable = false;
-			if(span.textContent != savedTextContent){
-				editableItem(span.textContent);
-			}
+			button.style.display = 'block';
+			editableItem(span.textContent);
+		} else{
+			span.contentEditable = false;
+			button.style.display = 'block';
+			span.textContent = savedTextContent;
 		}
 	}, false);
 	
