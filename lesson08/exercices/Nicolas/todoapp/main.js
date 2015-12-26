@@ -4,6 +4,7 @@ if(localStorage.length == 0){
 }
 
 var savedTextContent = null;
+var keypressEventTrigger = false;
 var todos = JSON.parse(localStorage.todos);
 var input = document.querySelector('.new-todo');
 var ul = document.querySelector('.todo-list');
@@ -52,27 +53,33 @@ function addEvents(li, span, button){
 		savedTextContent = span.textContent;
 	}, false);
 
-	// span.addEventListener('keypress', function (e){
-	// 	if(e.keyCode == 13 && !check(span.textContent) && span.textContent != savedTextContent){
-	// 		span.contentEditable = false;
-	// 		button.style.display = 'block';
-	// 		editableItem(span.textContent);
-	// 	} else if(e.keyCode == 13 && check(span.textContent) || span.textContent == savedTextContent){
-	// 		span.contentEditable = false;
-	// 		button.style.display = 'block';
-	// 		span.textContent = savedTextContent;
-	// 	}
-	// }, false);
-
-	span.addEventListener('blur', function (){
-		if(!check(span.textContent)){
+	span.addEventListener('keypress', function (e){
+		if(e.keyCode == 13 && !check(span.textContent)){
+			keypressEventTrigger = true;
 			span.contentEditable = false;
 			button.style.display = 'block';
 			editableItem(span.textContent);
-		} else{
+		} else if(e.keyCode == 13 && check(span.textContent)){
+			keypressEventTrigger = true;
 			span.contentEditable = false;
 			button.style.display = 'block';
 			span.textContent = savedTextContent;
+		}
+	}, false);
+
+	span.addEventListener('blur', function (){
+		if(!keypressEventTrigger){
+			if(!check(span.textContent)){
+				span.contentEditable = false;
+				button.style.display = 'block';
+				editableItem(span.textContent);
+			} else{
+				span.contentEditable = false;
+				button.style.display = 'block';
+				span.textContent = savedTextContent;
+			}
+		} else{
+			keypressEventTrigger = false;
 		}
 	}, false);
 	
