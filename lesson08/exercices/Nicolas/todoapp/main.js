@@ -35,14 +35,14 @@ function removeItem(textContent){
 	}
 }
 
-function check(textContent){
-	var duplicate = false;
+function checkValue(textContent){
+	var error = false;
 	for(var i = 0; i <= todos.length; i++){
 		if(textContent == todos[i] || textContent == ''){
-			duplicate = true;
+			error = true;
 		}
 	}
-	return duplicate;
+	return error;
 }
 
 function addEvents(li, span, button){
@@ -54,12 +54,12 @@ function addEvents(li, span, button){
 	}, false);
 
 	span.addEventListener('keypress', function (e){
-		if(e.keyCode == 13 && !check(span.textContent)){
+		if(e.keyCode == 13 && !checkValue(span.textContent)){
 			keypressEventTrigger = true;
 			span.contentEditable = false;
 			button.style.display = 'block';
 			editableItem(span.textContent);
-		} else if(e.keyCode == 13 && check(span.textContent)){
+		} else if(e.keyCode == 13 && checkValue(span.textContent)){
 			keypressEventTrigger = true;
 			span.contentEditable = false;
 			button.style.display = 'block';
@@ -69,7 +69,7 @@ function addEvents(li, span, button){
 
 	span.addEventListener('blur', function (){
 		if(!keypressEventTrigger){
-			if(!check(span.textContent)){
+			if(!checkValue(span.textContent)){
 				span.contentEditable = false;
 				button.style.display = 'block';
 				editableItem(span.textContent);
@@ -105,7 +105,7 @@ if(todos.length != 0){
 }
 
 input.addEventListener('keypress', function (e){
-	if(e.keyCode == 13 && !check(input.value)){
+	if(e.keyCode == 13 && !checkValue(input.value)){
 		li = document.createElement('li');
 		span = document.createElement('span');
 		button = document.createElement('button');
