@@ -47,15 +47,15 @@ function checkValue(value){
 	return error;
 }
 
-function addEvents(li, span, button){
-	span.addEventListener('dblclick', function (){
+function addEvents(li,span,button){
+	span.addEventListener('dblclick',function (){
 		button.style.display = 'none';
 		span.contentEditable = true;
 		span.focus();
 		saveValue = span.textContent;
-	}, false);
+	},false);
 
-	span.addEventListener('keypress', function (e){
+	span.addEventListener('keypress',function (e){
 		if(e.keyCode == 13 && !checkValue(span.textContent)){
 			triggerKeypressEvent = true;
 			span.contentEditable = false;
@@ -67,9 +67,9 @@ function addEvents(li, span, button){
 			button.style.display = 'block';
 			span.textContent = saveValue;
 		}
-	}, false);
+	},false);
 
-	span.addEventListener('blur', function (){
+	span.addEventListener('blur',function (){
 		if(!triggerKeypressEvent){
 			if(!checkValue(span.textContent)){
 				span.contentEditable = false;
@@ -83,12 +83,12 @@ function addEvents(li, span, button){
 		} else{
 			triggerKeypressEvent = false;
 		}
-	}, false);
+	},false);
 	
-	button.addEventListener('click', function (){
+	button.addEventListener('click',function (){
 		ul.removeChild(li);
 		removeItem(span.textContent);
-	}, false);
+	},false);
 }
 
 if(todos.length != 0){
@@ -98,7 +98,7 @@ if(todos.length != 0){
 		button = document.createElement('button');
 
 		span.textContent = todos[i];
-		addEvents(li, span, button);
+		addEvents(li,span,button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
@@ -106,14 +106,14 @@ if(todos.length != 0){
 	}
 }
 
-input.addEventListener('keypress', function (e){
+input.addEventListener('keypress',function (e){
 	if(e.keyCode == 13 && !checkValue(input.value)){
 		li = document.createElement('li');
 		span = document.createElement('span');
 		button = document.createElement('button');
 
 		span.textContent = input.value;
-		addEvents(li, span, button);
+		addEvents(li,span,button);
 
 		ul.appendChild(li);
 		li.appendChild(span);
@@ -122,4 +122,4 @@ input.addEventListener('keypress', function (e){
 		input.value = '';
 		addItem(span.textContent);
 	}
-}, false);
+},false);
