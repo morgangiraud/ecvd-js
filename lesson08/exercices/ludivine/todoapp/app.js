@@ -7,10 +7,14 @@ document.querySelector(".new-todo").addEventListener("keypress", function(event)
 		var itemList = document.createTextNode(document.getElementsByClassName("new-todo")[0].value);
 		label.appendChild(itemList);
 		list.appendChild(label);
+
 		var done = document.createElement("input");
 		done.classList.add("toggle");
 		done.setAttribute("type", "checkbox");
 		list.appendChild(done);
+
+		var dragndrop = document.createElement("li");
+
 
 		document.getElementById("todo-list").appendChild(list);
 
@@ -39,25 +43,58 @@ addEventListener("click", function(event) {
 	}
 });
 
-document.querySelector(".draggable").addEventListener('dragstart', function(event) {
 
-	var drag = document.createElement('draggable');
+/* Drag'n drop */
 
+	draggable = document.getElementById("mydraggable");
+ 
+	draggable.addEventListener("dragstart", function(event){
 
+    var list = event.target.getAttribute("li");
+ 
+	event.dataTransfer.setData("text/html","<li></li>");
+	var textData = event.dataTransfer.getData("text/html");
+	var target=document.getElementById('todo-list');
+	target.innerHTML=textData;
 })
 
-document.querySelector('#dropper').addEventListener('drop', function(event) {
-
+	var dropzone = document.getElementById("mydropzone");
+ 
+dropzone.addEventListener("dragenter", function(event){
     event.preventDefault();
+})
 
-}
+dropzone.addEventListener("dragover", function(event){
+
+    event.dataTransfer.dropEffect = "move";
+	event.preventDefault();
+    return false; 
+})
+
+dropzone.addEventListener("drop", function(event){
+    var itemlist = document.createElement("li");
+    span.innerHTML = event.dataTransfer.getData("text/plain");
+    list.appendChild(itemlist);
+
+event.preventDefault();
+})
+
+/* Editable elements */
+
+var list = document.querySelector('li');
+var editList = document.querySelector('.edit-list');
+
+addEventListener("click", function(event) {
+  list.contentEditable = true;
+
+})
 
 function main() {
 
 
-	var todos = [];
+		var todos = [];
 
-	function addItem(itemList) {
+		function addItem(itemList) {
 
 		   		todos.push(itemList);
 		   		return todos;
