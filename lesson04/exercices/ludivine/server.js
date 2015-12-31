@@ -46,13 +46,7 @@ var proxy = http.createServer(function (browserRequest, proxyResponse) {
  
       websiteResponse.on('end', function() {
     		proxyResponse.end(dataAll);
-<<<<<<< HEAD
-        //websiteResponse.header 
     	});
-
-=======
-    	});
->>>>>>> 9e9665ef0293b7615d0da4350db5138ff8efa83e
     });
       console.log(browserRequest.url);
 
