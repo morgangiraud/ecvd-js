@@ -35,8 +35,6 @@ The goal of the game is to have the best highscores among other players !
 The game itself will consist at clicking on a square on the screen.
 Each time a click on the square is made, the square may gets smaller or the time to click on it may reduce.
 
-Simple isn't it ?
-
 --------------------------------
 Those next lines describes needed functions for the game, it is NOT ordered.
 Take time to read through the whole exercice.
@@ -46,7 +44,7 @@ If you think you need to add any extra functions or data, feel free to do so.
 - Initialize the Game
   - Write a function named `restart()` which restart the game
     - Don't forget to reinitialize the game's variables
-    - Use it as a `closure` for the `init function`
+    - Use it as a `closure` of the `init function`
     - Bind it to the `start` and `restart` button `click` event
 
 - Create a `getRandomInBetween` function which return a random number between a `min` and a `max` value
@@ -69,7 +67,9 @@ If you think you need to add any extra functions or data, feel free to do so.
   - Use a random function
   - Tweak it to make the game fun
 
-- Create a function named `incrementScore` which increment the score on each click and update the HTML
+- Create a function named `incrementScore` which
+  - Increment the score on each click
+  - Update the HTML
 
 - Create a function named `startTimer` which start/restart the timer
   - Use the setInterval/clearInterval function for the timer
@@ -87,7 +87,7 @@ If you think you need to add any extra functions or data, feel free to do so.
 
 ---------------
 - Bonus: If you have time:
-  - Clean your code, make it beautifull
+  - Clean your code, make it beautiful
   - Clean the design
   - Make an awesome highscore! 
 
