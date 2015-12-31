@@ -41,7 +41,5 @@ function todoList(){
     }
   });
 
-
-
 }
 todoList();
