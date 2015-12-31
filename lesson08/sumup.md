@@ -14,4 +14,7 @@
   - Assertions
 
 ## Exercice
+- First implementation of a simple todo list
+    - Filtering based todos status
+    - Add LocalStorage
 - Read the eloquent javascript page 149 - 163

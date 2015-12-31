@@ -6,5 +6,6 @@
   - Exercices
 
 ## Homework
+- Algo exercices
 - Node chain exercice
 - Read in-course links

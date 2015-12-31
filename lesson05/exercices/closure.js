@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9e9665ef0293b7615d0da4350db5138ff8efa83e
 function createClosure(){ 
   console.log("Creating a closure");
   var localState = 'pending';
@@ -17,7 +20,10 @@ function createClosure(){
         console.log(localState);
     }
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9e9665ef0293b7615d0da4350db5138ff8efa83e
   return closure;
 }
 var closure = createClosure();

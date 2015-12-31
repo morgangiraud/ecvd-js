@@ -4,12 +4,28 @@ function initTodo(){
   "strict"
 
   var dbName = "ecvd-todo";
-  var todos = [];
+  var todos;
   var ul = document.querySelector("ul.todo-list");
   var filters = document.querySelector("ul.filters");
 
+  if(typeof(Storage) !== "undefined") {
+    if(localStorage["ecvd-todo"] !== undefined){
+      load();
+      refresh();
+    } else {
+      todos = [];
+      localStorage["ecvd-todo"] = JSON.stringify([]);
+    }
+  } else {
+    todos = [];
+  }
+
   function addTodo(todoText){
-    todos.push(item.create(todoText));
+    var todo = item.create(todoText);
+    if( /completed/.test(document.querySelector(".filters .selected").href)){
+      todo.visible = false;
+    }
+    todos.push(todo);
     refresh();
   }
 
@@ -20,6 +36,7 @@ function initTodo(){
       var swappedTodo = todos[swappedIndex];
       todos.splice(swappedIndex, 1, todos[index]);
       todos.splice(index, 1, swappedTodo);
+      save();
     }
   }
 
@@ -39,6 +56,7 @@ function initTodo(){
       var node = ul.querySelector("li[data-id=\"" + todoId + "\"]");
       node.className = "completed";
     }
+    save();
   }
 
   function undone(todoId){
@@ -48,22 +66,25 @@ function initTodo(){
       var node = ul.querySelector("li[data-id=\"" + todoId + "\"]");
       node.className = "";
     }
+    save();
   }
 
   function refresh(){
     strArray = [];
     for (var i = todos.length - 1; i >= 0; i--) {
-      strArray.push('<li data-id="' + todos[i].id + '" class="' + (todos[i].done ? "completed" : "") + '" draggable="true">');
-      strArray.push('<div class="view">');
-      if(todos[i].done){
-        strArray.push('<input class="toggle" type="checkbox" checked>');
-      } else {
-        strArray.push('<input class="toggle" type="checkbox">');  
+      if(todos[i].visible){
+        strArray.push('<li data-id="' + todos[i].id + '" class="' + (todos[i].done ? "completed" : "") + '" draggable="true">');
+        strArray.push('<div class="view">');
+        if(todos[i].done){
+          strArray.push('<input class="toggle" type="checkbox" checked>');
+        } else {
+          strArray.push('<input class="toggle" type="checkbox">');  
+        }
+        strArray.push('<label>' + todos[i].text + '</label>');  
+        strArray.push('<button class="destroy"></button>');  
+        strArray.push('</div>');  
+        strArray.push('</li>');  
       }
-      strArray.push('<label>' + todos[i].text + '</label>');  
-      strArray.push('<button class="destroy"></button>');  
-      strArray.push('</div>');  
-      strArray.push('</li>');  
     }
 
     ul.innerHTML = strArray.join('');
@@ -80,6 +101,7 @@ function initTodo(){
         }
       });
     };
+    save();
   }
   
   // Hot reloading helpers
@@ -107,6 +129,21 @@ function initTodo(){
     return -1;
   }
 
+  function save(){
+    localStorage["ecvd-todo"] = JSON.stringify(todos);
+  }
+
+  function load(){
+    todos = JSON.parse(localStorage["ecvd-todo"]);
+
+    var currentId = 0
+    for (var i = todos.length - 1; i >= 0; i--) {
+      currentId = Math.max(currentId, parseInt(todos[i].id, 10));
+      todos[i].visible = true; //The app start with the all selector on
+    };
+    item.setCurrentId(currentId + 1);
+  }
+
   function swap(elem, type){
     switch(type){
       case "after":
@@ -121,6 +158,41 @@ function initTodo(){
     }
   }
 
+  function show(type) {
+    for (var i = todos.length - 1; i >= 0; i--) {
+      switch(type){
+        case "active":
+          if(todos[i].done === false){
+            todos[i].visible = true;
+          } else {
+            todos[i].visible = false;
+          }
+          break;
+        case "completed":
+          if(todos[i].done === true){
+            todos[i].visible = true;
+          } else {
+            todos[i].visible = false;
+          }
+          break;
+        case "all":
+        default:
+          todos[i].visible = true;
+          break;
+      }
+    };
+    refresh();
+  }
+
+  function clearCompleted(){
+    for (var i = todos.length - 1; i >= 0; i--) {
+      if(todos[i].done){
+        todos.splice(i, 1);
+      }
+    };
+    refresh();
+  }
+
   return {
     addTodo: addTodo,
     removeTodo: removeTodo,
@@ -128,7 +200,9 @@ function initTodo(){
     getTodos: getTodos,
     setTodos: setTodos,
     done: done,
-    undone: undone
+    undone: undone,
+    show: show,
+    clearCompleted: clearCompleted
   }
 }
 
