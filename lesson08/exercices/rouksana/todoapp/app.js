@@ -83,5 +83,54 @@ function todoList(){
     }
   });
 
+  function show(type) {
+    for (var i = 0; i < todos.length; i++) {
+      switch(type){
+        case "active":
+          if(todos[i].done === false){
+            todos[i].visible = true;
+          } else {
+            todos[i].visible = false;
+          }
+          break;
+        case "completed":
+          if(todos[i].done === true){
+            todos[i].visible = true;
+          } else {
+            todos[i].visible = false;
+          }
+          break;
+        case "all":
+        default:
+          todos[i].visible = true;
+          break;
+      }
+    };
+    refresh();
+  }
+
+  var filters = document.querySelectorAll("ul.filters li");
+  for (var i = 0; i < filters.length; i++) {
+    filters[i].addEventListener("click", function(e){
+
+      var selected = document.querySelectorAll("ul.filters li a.selected");
+      for (var i = 0; i < selected.length; i++) {
+        selected[i].className= "";
+      }
+
+      if(/active/.test(this.querySelector('a').href)){
+        show("active");
+      } else if(/completed/.test(this.querySelector('a').href)){
+        show("completed");
+      } else {
+        show("all");
+      }
+      this.querySelector("a").className = "selected";
+      
+      refresh();
+    });
+  }
+
+
 }
 todoList();
