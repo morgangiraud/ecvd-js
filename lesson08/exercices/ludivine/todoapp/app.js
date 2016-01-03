@@ -43,24 +43,51 @@ addEventListener("click", function(event) {
 	}
 });
 
-var dropper = document.querySelector(".draggable").addEventListener('dragstart', function(event) {
 
-	raggableElement.addEventListener('dragstart', function(event) {
+/* Drag'n drop */
 
-    event.dataTransfer.setData('text/plain', "");
+	draggable = document.getElementById("mydraggable");
+ 
+	draggable.addEventListener("dragstart", function(event){
 
-}, false);
-
-
+    var list = event.target.getAttribute("li");
+ 
+	event.dataTransfer.setData("text/html","<li></li>");
+	var textData = event.dataTransfer.getData("text/html");
+	var target=document.getElementById('todo-list');
+	target.innerHTML=textData;
 })
 
-document.querySelector('#dropper').addEventListener('drop', function(event) {
+	var dropzone = document.getElementById("mydropzone");
+ 
+dropzone.addEventListener("dragenter", function(event){
+    event.preventDefault();
+})
 
-    event.preventDefault(); 
+dropzone.addEventListener("dragover", function(event){
 
+    event.dataTransfer.dropEffect = "move";
+	event.preventDefault();
+    return false; 
+})
 
-}, false);
+dropzone.addEventListener("drop", function(event){
+    var itemlist = document.createElement("li");
+    span.innerHTML = event.dataTransfer.getData("text/plain");
+    list.appendChild(itemlist);
 
+event.preventDefault();
+})
+
+/* Editable elements */
+
+var list = document.querySelector('li');
+var editList = document.querySelector('.edit-list');
+
+addEventListener("click", function(event) {
+  list.contentEditable = true;
+
+})
 
 function main() {
 
