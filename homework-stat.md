@@ -1,6 +1,6 @@
 # Homework statistic
 
-This file sums up when homeworks have been done
+This file sums up homeworks
 
 **'x'**: Work has been done (0,5pt)
 
@@ -11,15 +11,13 @@ This file sums up when homeworks have been done
 |    x    | Rouksana |  Tony   |  Irfann | Ludivine | Nicolas |  Yaovi | Guillaume |
 |:-------:|:--------:|:-------:|:-------:|:--------:|:-------:|:------:|:---------:|
 | l1      |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |   xx*  |    xx*    |
-| l2      |    xx*   |  xx*    |    xx*  |    xx*   |         |        |    xx*    |
+| l2      |    xx*   |  xx*    |    xx*  |    xx*   |    x    |    x   |    xx*    |
 | l3      |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |    x   |    xx*    |
-| l4      |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |        |    xx*    |
-| l4 (2)  |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |        |    xx*    |
-| l5      |    xx*   |  xx*    |    xx*  |    x*    |    xx*  |        |    xx*    |
-| l6      |          |  x*     |    x*   |    x*    |    x*   |        |           |
-| l7      |          |         |    x*   |    x*    |    x*   |        |     x*    |
-| l8      |          |         |    x*   |          |    x*   |    *   |     x*    |
-| l9      |     -    |     -   |     -   |     -    |    -    |    -   |     -     |
-| l10     |     -    |     -   |     -   |     -    |    -    |    -   |     -     |
-| Total   |  12/18   | 13,5/18 | 16,5/18 | 14,5/18  | 14,5/18 | 3,5/18 |   15/18   |
-| on 20   |  xx/20   | xx/20   |   xx/20 |  xx/20   |  xx/20  |  xx/20 |   xx/20   |
+| l4      |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |    x   |    xx*    |
+| l4 (2)  |    xx*   |  xx*    |    xx*  |    xx*   |    xx*  |    x   |    xx*    |
+| l5      |    xx*   |  xx*    |    xx*  |    x*    |    xx*  |    x   |    xx*    |
+| l6      |    xx    |  x*     |    x*   |    x*    |    x*   |        |    xx     |
+| l7      |    xx    |         |    x*   |    x*    |    x*   |        |    xx     |
+| l8      |    x     |         |    x*   |    x     |    x*   |    *   |    xx     |
+| Total   | 15,5/18  | 13/18   |  15/18  | 13,5/18  | 13,5/18 |  5/18  |  16,5/18  |
+|  /20    |  17/20   | 14,5/20 | 16,5/20 |  15/20   |  15/20  | 5,5/20 |   18/20   |
