@@ -1,0 +1,226 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+        background-color: #FDF3E7;
+      }
+      #playground{
+        width:100%;
+        height: 100%;
+      }
+      .box {
+        position: absolute;
+        border: 0px;
+        background-color: #C63D0F;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #score{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size: 24px;
+      }
+      #timer{
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 24px;
+      }
+      #highscores{
+        display: none;
+        z-index: 1000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 500px;
+        height: 500px;
+      }
+      #scoreTable {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #restart {
+        width: 300px;
+        height: 150px;
+        line-height: 150px;
+        background-color: #7E8F7C;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #start{
+        position: absolute;
+        z-index: 1000;
+        background-color: #7E8F7C;
+        top: 5%;
+        left: 30%;
+        width: 300px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time left: 0</div>
+    <div id="start">Start !</div>
+    <div id="playground"></div>
+    <div id="highscores">
+      <div id="scoreTable"></div>
+      <div id="restart">Restart</div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8">
+
+
+    function init(){
+      var score = 0;
+      var maxTime = 10000;
+      var timeLeft = 0;
+      var width = 500;
+      var height = 500;
+      var hardeningCoef = 0.9;
+      var highscores = [];
+
+        
+      var target = document.getElementsByClassName('box');
+      var start = document.getElementById('start');
+      var restartBtn = document.getElementById('restart');
+      var playground = document.getElementById('playground');
+      var timer = document.getElementById('timer');
+
+      var timeInterval;
+
+      function generateNewSquare () {
+        var width = getRandomInBetween(200, 300) * hardeningCoef;
+        var height = getRandomInBetween(200, 300) * hardeningCoef;
+        var left = getRandomInBetween(0, 70);
+        var top = getRandomInBetween(0, 70);
+
+        var box = '<div class="box" style="width:' + width + 'px;line-height:' + height + 'px;left:' + left + '%;top:' + top + '%;">Click !</div>';
+        playground.innerHTML = box;
+      }
+
+      function nextTurn() {
+        incrementScore();
+        makeTheGameHarder();
+        document.getElementById('start').style.display = "none";
+        
+        generateNewSquare();
+      }
+
+      start.addEventListener('click', function(){
+        nextTurn();
+        startTimer();
+
+      });
+
+
+      restartBtn.addEventListener('click', function(){
+        console.log('end');
+        document.getElementById('start').style.display = "block";
+        restart();
+        // nextTurn();
+        // startTimer();
+
+      });
+
+      
+
+
+      document.querySelector('body').addEventListener('click', function(event) {
+        if (event.target.className == 'box') {
+          nextTurn();
+        }
+      });
+
+
+
+      document.querySelector('body').addEventListener('click', function(event) {
+        if (event.target.id == 'restart') {
+          restart();
+        }
+      });
+
+      function makeTheGameHarder () {
+        hardeningCoef -= 0.03;
+        if(getRandomInBetween(1, 2) == 1) {
+
+        } else {
+
+        }
+      }
+
+      function incrementScore () {
+        score++;
+        document.getElementById('score').innerHTML = 'Score: ' + score;
+      }
+
+      function startTimer () {
+        timeLeft = maxTime;
+        timeInterval = setInterval(function(){
+          timeLeft -= 100;
+          timer.innerHTML = 'Time left: ' + timeLeft/100;
+
+          if(timeLeft == 0) {
+            
+            endGame();
+          }
+        }, 100);
+      }
+
+      function endGame () {
+        for (var i = 1; i < 99999; i++)
+          window.clearInterval(i);
+
+        var username = prompt("Please enter your name", "Tony");
+        highscores.push({
+          username : username,
+          score: score
+        });
+        document.getElementsByClassName('box')[0].style.display = "none";
+        document.getElementById('highscores').style.display = "block";
+
+        var scores = "<br>";
+        for (i = 0; i < highscores.length; i++) {
+            scores  += i+1 + ". " + highscores[i].username + " | " + highscores[i].score + "<br>";
+        }
+
+        document.getElementById('highscores').innerHTML += scores;
+
+      }
+
+      function getRandomInBetween (min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function restart() {
+        score = 0;
+        maxTime = 10000;
+        timer = null;
+        width = 500;
+        height = 500;
+        hardeningCoef = 0.9
+
+
+        document.getElementById('highscores').style.display = "none";
+        document.getElementById('start').style.display = "block";
+      }
+
+      return restart;
+    }
+
+    
+
+    // init
+    app = init();
+
+
+    </script>
+  </body>
+</html>

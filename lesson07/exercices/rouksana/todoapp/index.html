@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <section class="todoapp">
+      <header class="header">
+        <h1>todos</h1>
+        <input class="new-todo" placeholder="What needs to be done?" autofocus>
+      </header>
+      <section class="main">
+        <ul class="todo-list" droppable="true"></ul>
+      </section>
+      <footer class="footer">
+        <span class="todo-count"></span>
+        <ul class="filters">
+          <li> <a href="#" class="selected">All</a> </li>
+          <li> <a href="#active">Active</a> </li>
+          <li> <a href="#completed">Completed</a> </li>
+        </ul>
+        <button class="clear-completed">Clear completed</button>
+      </footer>
+    </section>
+    <footer class="info"> 
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

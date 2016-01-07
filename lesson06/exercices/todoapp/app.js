@@ -5,7 +5,6 @@ function initTodo(){
 
   var todos = [];
   var ul = document.querySelector("ul.todo-list");
-  var newInput = document.querySelector("input.new-todo");
 
   function addTodo(todoText){
     todos.push(item.create(todoText));
@@ -13,20 +12,32 @@ function initTodo(){
   }
 
   function removeTodo(todoId){
+    if (typeof(todoId) === 'object' && todoId.id != null){
+      todoId = todoId.id;
+    }
     todoId = parseInt(todoId, 10);
+
     for (var i = todos.length - 1; i >= 0; i--) {
       if(todos[i].id === todoId){
         todos.splice(i, 1);
       }
     };
+
     refresh();  
   }
 
   function refresh(){
     str = "";
     for (var i = todos.length - 1; i >= 0; i--) {
-      str += '<li data-id="' + todos[i].id + '" class=""><div class="view"><label>' + todos[i].text + '</label><button class="destroy"></button></div></li>';
+      str += '\
+        <li data-id="' + todos[i].id + '" class=""> \
+          <div class="view">\
+            <label>' + todos[i].text + '</label>\
+            <button class="destroy"></button>\
+          </div>\
+        </li>';
     }
+
     ul.innerHTML = str;
   }
   
@@ -40,19 +51,6 @@ function initTodo(){
     refresh();
   }
 
-  // Events
-  newInput.addEventListener("keypress", function(e){
-    if(e.charCode === 13 && newInput.value != ""){
-      addTodo(newInput.value)
-      newInput.value = "";
-    }
-  });
-  ul.addEventListener("click", function(e){
-    if(e.target.nodeName === "BUTTON" && e.target.className === "destroy"){
-      removeTodo(e.target.parentElement.parentElement.dataset.id); 
-    }
-  })
-
   return {
     addTodo: addTodo,
     removeTodo: removeTodo,
@@ -65,6 +63,7 @@ function initTodo(){
 module.exports = initTodo;
 
 
+// Hot reloading
 if(module.hot) {
   module.hot.accept("./item.js", function() {
     var currentId = item.getCurrentId();

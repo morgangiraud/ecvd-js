@@ -1,0 +1,231 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+        background-color: #FDF3E7;
+      }
+      #playground{
+        width:100%;
+        height: 100%;
+      }
+      .box {
+        position: absolute;
+        border: 0px;
+        background-color: #C63D0F;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #score{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size: 24px;
+      }
+      #timer{
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 24px;
+      }
+      #highscores{
+        display: none;
+        z-index: 1000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 500px;
+        height: 500px;
+      }
+      #scoreTable {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #restart {
+        width: 300px;
+        height: 150px;
+        line-height: 150px;
+        background-color: #7E8F7C;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #start{
+        position: absolute;
+        z-index: 1000;
+        background-color: #7E8F7C;
+        top: 5%;
+        left: 30%;
+        width: 300px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time left: 0</div>
+    <div id="start">Start !</div>
+    <div id="playground"></div>
+    <div id="highscores">
+      <div id="scoreTable"></div>
+      <div id="restart">Restart</div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    function init(){
+      var score = 0;
+      var maxTime = 10000;
+      var timer = null;
+      var width = 500;
+      var height = 500;
+      var hardeningCoef = 0.9;
+      var highscores = load();
+
+      var $playground = document.querySelector("#playground");
+      var $score = document.querySelector("#score");
+      var $timer = document.querySelector("#timer");
+      var $highscores = document.querySelector("#highscores");
+      var $start = document.querySelector("#start");
+
+      // Start/restart the game
+      // Reinitialize game properties
+      function restart(){ // This function is our closure
+        score = 0;
+        maxTime = 10000;
+        width = 500;
+        height = 500;
+
+        // Launch the game
+        $highscores.style.display = "none";
+        $start.style.display = "none";
+        $score.innerHTML = "Score: " + score;
+        startTimer();
+        generateNewSquare();
+      }
+
+      // Private, Those following functions are in the init function scope
+
+      // callback function for the square click event
+      function nextTurn(){
+        incrementScore();
+        makeTheGameHarder();
+        startTimer();
+        generateNewSquare();
+      }
+
+      function incrementScore(){
+        score++;
+        $score.innerHTML = "Score: " + score;
+      }
+
+      // Reduce the maxTime to click on a squre or reduce the size of the square
+      function makeTheGameHarder(){
+        if(Math.random() > 0.5){
+          width = parseInt(width * hardeningCoef, 10);
+          height = parseInt(height * hardeningCoef, 10);
+        } else {
+          maxTime = parseInt(maxTime * hardeningCoef, 10);
+        }
+      }
+
+      // Clean and start a new timer
+      function startTimer() {
+        window.clearInterval(timer);
+        var localTime = maxTime;
+        timer = window.setInterval(function(){
+          localTime -= 33;
+          $timer.innerHTML = "Time Left: " + Math.max(localTime, 0);
+          if(localTime <= 0){
+            endGame();
+          }
+        },33);
+      }
+
+      // Generate a new square, erasing the old one in the meantime
+      // Setting the callback function on the click event
+      function generateNewSquare(){
+        /*jshint multistr: true */
+        $playground.innerHTML = '<div class="box" style=" \
+          line-height:' + height + 'px; \
+          width:' + width + 'px; \
+          height:' + height + 'px; \
+          top:' + getRandomInBetween(0, Math.max(window.innerHeight - height, 5)) + 'px; \
+          left:' + getRandomInBetween(0, Math.max(window.innerWidth - width, 5)) + 'px; \
+          ">Click Me</div>';
+        document.querySelector(".box").addEventListener("click", nextTurn);
+      }
+
+      // Get a random number between two boundaries
+      function getRandomInBetween(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function endGame(){
+        // Stop the game
+        window.clearInterval(timer);
+        document.querySelector(".box").removeEventListener("click", nextTurn);
+        $playground.innerHTML = "";
+
+        // Update highscores
+        var pseudo = prompt("What's your name ?");
+        if(pseudo === null || pseudo === ""){
+          pseudo = "no name";
+        }
+        highscores.push({
+          pseudo: pseudo,
+          score: score
+        });
+        highscores.sort(function(item1, item2){
+          if(item1.score < item2.score){
+            return 1;
+          } else if(item1.score > item2.score){
+            return -1;
+          }
+          return 0;
+        });
+        highscores = highscores.slice(0, 10);
+        save();
+
+        // Display highscores
+        var highscoresString = "<table style=\"width:100%\"><thead><tr><th>Pseudo</th><th>Score</th></thead></tr><tbody style=\"text-align:center;\">";
+        for (var i = 0; i < highscores.length; i++) {
+          highscoresString += "<tr><td>" + highscores[i].pseudo + "</td><td>" + highscores[i].score + "</td></tr>";
+        }
+        highscoresString += "</tbody></table>";
+        $highscores.querySelector("#scoreTable").innerHTML = highscoresString;
+        $highscores.style.display = "block";
+      }
+
+      // Save the game into the localStorage
+      function save() {
+        localStorage.boxGame = JSON.stringify(highscores);
+      }
+
+      // Load the game from the localStorage
+      function load() {
+        if(typeof localStorage.boxGame === 'string'){
+          return JSON.parse(localStorage.boxGame);
+        } else {
+          return [];
+        }
+      }
+
+      return {
+        restart: restart
+      };
+    }
+
+    // Initialize the game
+    app = init();
+    document.querySelector("#start").addEventListener("click", function(){
+      app.restart();
+    });
+    document.querySelector("#restart").addEventListener("click", function(){
+      app.restart();
+    });
+    </script>
+  </body>
+</html>

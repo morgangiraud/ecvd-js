@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      body {
+        background-color: #FDF3E7;
+      }
+      #playground{
+        width:100%;
+        height: 100%;
+      }
+      .box {
+        position: absolute;
+        border: 0px;
+        background-color: #C63D0F;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #score{
+        position:absolute;
+        right:0;
+        top:0;
+        font-size: 24px;
+      }
+      #timer{
+        position:absolute;
+        left:0;
+        top:0;
+        font-size: 24px;
+      }
+      #highscores{
+        display: none;
+        z-index: 1000;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 500px;
+        height: 500px;
+      }
+      #scoreTable {
+        width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      #restart {
+        width: 300px;
+        height: 150px;
+        line-height: 150px;
+        background-color: #7E8F7C;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+      }
+      #start{
+        position: absolute;
+        z-index: 1000;
+        background-color: #7E8F7C;
+        top: 5%;
+        left: 30%;
+        width: 300px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time left: 0</div>
+    <div id="start">Start !</div>
+    <div id="playground"></div>
+    <div id="highscores">
+      <div id="scoreTable"></div>
+      <div id="restart">Restart</div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    function init(){
+    var score = 0;
+    var maxTime = 10000;
+    var timer = null;
+    var width = 500;
+    var height = 500;
+    var hardeningCoef = 0.9;
+    var highscores = [];
+
+     function restart(){
+        var restart = document.getElementById("restart"),
+        add;
+
+    function start() {
+        add = setmaxTime(function start() {
+        restart.score++;
+        }, 1000);
+      }
+      start();
+      return (restart);
+  
+    function getRandomInBetween(min, max)
+      {
+          if (min < 0) {
+          return min + Math.random() * (Math.abs(min)+max);
+      }   else {
+          return min + Math.random() * max;
+      }
+  }
+
+  function incremetnScore(){
+    score++;
+    document.getElementById.innerHTML = "score";
+    }
+  } 
+}
+// init
+    app = init();
+    </script>
+  </body>
+</html>

@@ -1,12 +1,12 @@
-function closure(){
+function outside(){
 	var state = 'test';
 
-	function innerFunction(state){
+	function inner(state){
 		console.log(state);
 	}
 
-	return innerFunction;
+	return inner;
 }
 
-var f = closure();
-f('lolo');
+var closure = outside();
+closure('test2');
