@@ -1,4 +1,4 @@
-# ecvd-php
+# ecvd-js
 Lessons for the ECV Digital school - JS / Algorithmy
 
 ## Setup
