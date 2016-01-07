@@ -184,8 +184,8 @@ Regular expression objects have properties.
 ```javascript
 var pattern = /y/g; // Notice the g global flag
 var match = pattern.exec("xyzzy");
-console.log(match.index); // → 4
-console.log(pattern.lastIndex); // → 5
+console.log(match.index); // → 1
+console.log(pattern.lastIndex); // → 2
 pattern.exec("g")
 console.log(pattern.lastIndex); // → 0
 ```
