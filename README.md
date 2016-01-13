@@ -1,6 +1,8 @@
 # ecvd-js
 Lessons for the ECV Digital school - JS / Algorithmy
 
+You can find the website [here](http://morgangiraud.github.io/ecvd-js/)
+
 ## Setup
 Before starting you need to setup your environment.
 **(Mac OSX)**
