@@ -60,16 +60,15 @@
 ### Functionnal programming
 | Topic | Lesson |
 |---------|:--------:|
-| Abstraction | **10** |
-| Abstracting array traversal | **10** |
-| Higher order functions | **10** |
+| Introduction | **10** |
+| Pure functions | **10** |
+| Imperative and declarative style | **10** |
 | Passing along arguments | **10** |
-| Filtering an array | **10** |
-| Transforming with map | **10** |
-| Summarizing with reduce | **10** |
-| Composability | **10** |
-| The cost | **10** |
-| Binding | **10** |
+| Gorilla/Banana problem | **10** |
+| Category theory | **10** |
+| Associativity | **10** |
+| Currying | **10** |
+| Memoization | **10** |
 
 ### Bugs and Error Handling
 | Topic | Lesson |
